@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[hexo+next博客个性化]]></title>
+    <url>%2F2019%2F03%2F27%2Fhexonextcomment%2F</url>
+    <content type="text"><![CDATA[不定期更新Orz 1.浏览数量：将next的_config.yml文件设置如下： 123456789101112131415161718192021222324252627#Show PV/UV of the website/page with busuanzi.#Get more information on http://ibruce.info/2015/04/04/busuanzi/busuanzi_count:count values only if the other configs are false enable: true# custom uv span for the whole site site_uv: true site_uv_header: 本站访客数 site_uv_footer: 人次# custom pv span for the whole site site_pv: true site_pv_header: 本站总访问量 site_pv_footer: 次# custom pv span for one page only page_pv: true page_pv_header: 本页面共计被访问 page_pv_footer: 次 next主题已经内置了busuanzi可以统计访问量 需要注意的是 next6.0中的busuanzi的地址不对，需要在busuanzi-counter.swig修改相关的相应的新的网址，修改为： 12345678910111213141516171819202122&#123;% if theme.busuanzi_count.enable %&#125;&lt;div class=&quot;busuanzi-count&quot;&gt;&lt;script async src=&quot;//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt; &#123;% if theme.busuanzi_count.site_uv %&#125; &lt;span class=&quot;site-uv&quot;&gt; &#123;&#123; theme.busuanzi_count.site_uv_header &#125;&#125; &lt;span class=&quot;busuanzi-value&quot; id=&quot;busuanzi_value_site_uv&quot;&gt;&lt;/span&gt; &#123;&#123; theme.busuanzi_count.site_uv_footer &#125;&#125; &lt;/span&gt; &#123;% endif %&#125; &#123;% if theme.busuanzi_count.site_pv %&#125; &lt;span class=&quot;site-pv&quot;&gt; &#123;&#123; theme.busuanzi_count.site_pv_header &#125;&#125; &lt;span class=&quot;busuanzi-value&quot; id=&quot;busuanzi_value_site_pv&quot;&gt;&lt;/span&gt; &#123;&#123; theme.busuanzi_count.site_pv_footer &#125;&#125; &lt;/span&gt; &#123;% endif %&#125;&lt;/div&gt;&#123;% endif %&#125; 完成后，效果如下： 2.评论系统采用了Valine，也可以在最新的next主题内直接使用： 12345678910111213# Valine.# You can get your appid and appkey from https://leancloud.cn# more info please open https://valine.js.orgvaline: enable: true appid: yourID appkey: yourKEY notify: true # mail notifier , https://github.com/xCss/Valine/wiki verify: false # Verification code placeholder: 不输入上述信息将触发匿名评论。Comment here. # comment box placeholder avatar: retro # gravatar style guest_info: nick,mail,link # custom comment header pageSize: 10 # pagination size 具体方法可以参照： Valine|介绍 值得注意的是，如果你在访问流量的收集时，用到了leancloud，请采用我上述的方式，防止评论系统不可使用，具体原因可以参照下面的网站： https://reuixiy.github.io/technology/computer/computer-aided-art/2018/07/15/use-valine-in-theme-next.html 效果图如下： 现在还未实现发送评论后，立刻给我发送邮件的功能，可以参照下方地址 Valine-Admin/高级配置 3.解决图片无法加载的问题在hexo中的_config.yml 1`post_asset_folder: true` 重要的是使用相对路径引用的标签插件 例如： 123&#123;% asset_img example.jpg This is an example image %&#125;//或者![](hexonextcomment/2.png) 参考： 资源文件夹 4.添加阅读全文1&lt;!-- more --&gt; 将上方代码添加到你想要的位置 5.搜索服务Local Search先安装hexo-generator-searchdb： 1npm install hexo-generator-searchdb --save 然后在站点配置文件，注意不是主题配置，添加以下代码： 12345search: path: search.xml field: post format: html limit: 10000 然后主题配置文件找到local_search改为true，然后从上面提供的样式选一个填入pace_theme中就可以了： 123# Local searchlocal_search: enable: true 菜单栏出现搜索功能。]]></content>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[汇编语言]]></title>
+    <url>%2F2019%2F03%2F25%2F%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%2F</url>
+    <content type="text"><![CDATA[汇编语言实验1.挂载相关的信息 mount c /Users/panyumingzhi/masm 2.转到c: c: 3.相关指令： ​ r: ​ 1.加寄存器的名字，修改寄存器的内容 ​ 2.显示寄存器的内容 ​ a:汇编 ​ u:显示写的程序的内容，反汇编 ​ t:单步执行 ​ d:显示寄存器 ​ e:编辑寄存器内容 ​ g:按地址执行 ​ q:退出 TO BE CONTINUE]]></content>
+      <tags>
+        <tag>汇编语言</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[使用YCSB测试LevelDB的性能]]></title>
+    <url>%2F2019%2F03%2F25%2F%E4%BD%BF%E7%94%A8YCSB%E6%B5%8B%E8%AF%95LevelDB%E7%9A%84%E6%80%A7%E8%83%BD%2F</url>
+    <content type="text"><![CDATA[#使用YCSB测试LevelDB的性能 使用LevelDB的接口连接至YCSB，与YCSB的接口连接实现测试性能。 LevelDB接口中文介绍 YCSB接入新的数据库的方法 最后在GitHub上找到了使用YCSB1.4.0版本的ycsb-leveldb 使用命令 mvn -pl com.yahoo.ycsb:leveldb-binding -am clean package 对文件进行编译 之后由于此文档中把ycsb生成了ycsb.sh程序 因此使用 ./ycsb进行执行,测试leveldb性能 12./ycsb load basic -P workloads/workloada./ycsb run basic -P workloads/workloada]]></content>
+      <tags>
+        <tag>leveldb</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2F2019%2F03%2F24%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+  </entry>
+</search>
