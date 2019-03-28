@@ -493,7 +493,7 @@ pre,
 }
 pre,
 code {
-  font-family: 'ZCOOLXiaoWei-Regular', consolas, Menlo, "PingFang SC", "Microsoft YaHei", monospace;
+  font-family: consolas, Menlo, "PingFang SC", "Microsoft YaHei", monospace;
 }
 code {
   padding: 2px 4px;
@@ -1823,7 +1823,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #c6c8ff;
+  background: #6aff04;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3123,7 +3123,7 @@ pre .javascript .function {
 }
 @font-face {
   font-family: Pacifico-Regular;
-  src: url("/fonts/Pacifico-Regular.ttf");
+  src: url("https://fonts.googleapis.com/css?family=Libre+Barcode+39");
 }
 @font-face {
   font-family: NotoSerifSC-Light;
@@ -3135,5 +3135,5 @@ pre .javascript .function {
 }
 @font-face {
   font-family: ZCOOLXiaoWei-Regular;
-  src: url("/fonts/ZCOOLXiaoWei-Regular.ttf");
+  src: url("https://fonts.googleapis.com/css?family=ZCOOL+XiaoWei&subset=chinese-simplified");
 }
