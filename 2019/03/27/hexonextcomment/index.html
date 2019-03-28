@@ -63,7 +63,11 @@
   
 
   
+    
+      
+    
 
+    
   
 
   
@@ -75,11 +79,25 @@
   
 
   
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
 
   
     
     
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Pacifico cursive:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=NotoSerifSC-Light:300,300italic,400,400italic,700,700italic|NotoSerifSC-SemiBold:300,300italic,400,400italic,700,700italic|NotoSerifSC-Light:300,300italic,400,400italic,700,700italic|Pacifico:300,300italic,400,400italic,700,700italic|ZCOOLXiaoWei-Regular:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -135,7 +153,7 @@
 <meta property="og:image" content="http://www.yumz-p.xyz/2019/03/27/hexonextcomment/5.png">
 <meta property="og:image" content="http://www.yumz-p.xyz/2019/03/27/hexonextcomment/6.png">
 <meta property="og:image" content="http://www.yumz-p.xyz/2019/03/27/hexonextcomment/7.png">
-<meta property="og:updated_time" content="2019-03-28T05:17:34.480Z">
+<meta property="og:updated_time" content="2019-03-28T06:36:19.433Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo+next博客个性化">
 <meta name="twitter:description" content="不定期更新Orz  1.浏览数量：将next的_config.yml文件设置如下： 123456789101112131415161718192021222324252627#Show PV/UV of the website/page with busuanzi.#Get more information on http://ibruce.info/2015/04/04/busuanzi/bus">
@@ -400,7 +418,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1k
+                  1.7k
                 </span>
               
 
@@ -477,6 +495,22 @@
 <p><a href="https://ziyuan.baidu.com/linksubmit/index" target="_blank" rel="noopener">百度搜索引擎入口</a>。<br>不管谷歌还是百度都要先添加域名，然后验证网站，这里统一都使用文件验证，就是下载对应的html文件，放到域名根目录下，也就收博客根目录下的<code>source/</code>下面 。<br>然后部署到服务器,输入地址：<code>http://chaooo.github.io/google4cc3eef6ff5975bf.html</code>和<code>http://chaooo.github.io/baidu_verify_wjJ25Q3cv2.html</code>能访问到就可以点验证按钮(按照谷歌或百度的引导步骤就好)。<br><strong>注意：若出现验证失败，则是因为hexo编译文件时，会给下载的HTML文件中添加其他的内容，导致验证失败。</strong></p>
 <p>这个时候要把相应的文件在hexo中删除，在Github里手动修改验证HTML文件，或者不编译。</p>
 <p><img src="/2019/03/27/hexonextcomment/7.png" alt></p>
+<h1 id="8-修改字体"><a href="#8-修改字体" class="headerlink" title="8.修改字体"></a>8.修改字体</h1><h1 id="样式文件"><a href="#样式文件" class="headerlink" title="样式文件"></a>样式文件</h1><p>假设Next主题的目录名称为<code>next</code>，如果要自定义CSS样式，只要在<code>themes/next/source/css/_custom/custom.styl</code>文件中写入相应的CSS代码就行了。</p>
+<p><strong>注意</strong></p>
+<ul>
+<li>文件后缀为<code>styl</code>，猜测可能是使用stylus语法的样式文件。但是我试过了，直接写CSS代码是可行的。</li>
+<li>涉及到文件引用的地方要注意路径。如果使用相对路径，默认当前目录为<code>themes/next/source/css/</code>。</li>
+<li>注意要执行<code>hexo clean</code>命令，清除已经生成的文件。然后再执行<code>hexo generate</code>重新生成文件。否则样式可能不会生效。</li>
+<li>如果页面刷新后，新的样式没有生效，建议检查<code>public/css/main.css</code>中有没有加入新的CSS代码。</li>
+</ul>
+<h1 id="自定义字体"><a href="#自定义字体" class="headerlink" title="自定义字体"></a>自定义字体</h1><h2 id="字体文件"><a href="#字体文件" class="headerlink" title="字体文件"></a>字体文件</h2><p>当前我只能确定支持<code>ttf</code>以及<code>eot</code>格式的字体文件。定义一个字体，首先要确定字体文件的路径。我把字体文件<code>*.ttf</code>放在<code>source/fonts/</code>路径下，hexo生成页面时会把fonts目录复制到<code>public/</code>中。我的网站是建在根目录下的，字体文件引入的路径为<code>/fonts/*.ttf</code>。<br>在<code>themes/next/source/css/_custom/custom.styl</code>文件中加入以下代码，其中<code>font-family</code>的值是你定义的字体的名称，也就是你后面使用字体时的名称。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@font-face&#123;</span><br><span class="line">    font-family: *;</span><br><span class="line">    src: url(&apos;/fonts/*.ttf&apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后要在命令行中执行以下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
+<p>这样，该样式就能在主题中生效了。如果页面刷新后没有改变，可能是缓存的问题。查看<code>public/css/main.css</code>文件，看看文件末尾有没有新加入的CSS代码。</p>
+<h2 id="代码块使用字体"><a href="#代码块使用字体" class="headerlink" title="代码块使用字体"></a>代码块使用字体</h2><p>既然字体（CSS样式）已经生效了，那就可以在主题中使用该字体了。<br>修改主题配置文件<code>themes/next/_config.yml</code>中<code>codes</code>的配置内容即可。主题会优先使用该字体，当该字体不存在时，会使用其他预设的字体。另外建议把<code>host</code>这一项改为国内的反代理服务器，如<code>//fonts.css.network</code>，以提升访问速度。默认是谷歌的服务器，国内连不上。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">font:</span></span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Uri of fonts host. E.g. //fonts.googleapis.com (Default).</span></span><br><span class="line"><span class="attr">  host:</span> </span><br><span class="line"></span><br><span class="line">  <span class="comment"># Font options:</span></span><br><span class="line">  <span class="comment"># `external: true` will load this font family from `host` above.</span></span><br><span class="line">  <span class="comment"># `family: Times New Roman`. Without any quotes.</span></span><br><span class="line">  <span class="comment"># `size: xx`. Use `px` as unit.</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Global font settings used on &lt;body&gt; element.</span></span><br><span class="line"><span class="attr">  global:</span></span><br><span class="line"><span class="attr">    external:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    family:</span> <span class="string">Lato</span></span><br><span class="line"><span class="attr">    size:</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Font settings for Headlines (h1, h2, h3, h4, h5, h6).</span></span><br><span class="line">  <span class="comment"># Fallback to `global` font settings.</span></span><br><span class="line"><span class="attr">  headings:</span></span><br><span class="line"><span class="attr">    external:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    family:</span></span><br><span class="line"><span class="attr">    size:</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Font settings for posts.</span></span><br><span class="line">  <span class="comment"># Fallback to `global` font settings.</span></span><br><span class="line"><span class="attr">  posts:</span></span><br><span class="line"><span class="attr">    external:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    family:</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Font settings for Logo.</span></span><br><span class="line">  <span class="comment"># Fallback to `global` font settings.</span></span><br><span class="line"><span class="attr">  logo:</span></span><br><span class="line"><span class="attr">    external:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    family:</span> <span class="string">Pacifico</span></span><br><span class="line"><span class="attr">    size:</span> <span class="number">24</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Font settings for &lt;code&gt; and code blocks.</span></span><br><span class="line"><span class="attr">  codes:</span></span><br><span class="line"><span class="attr">    external:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    family:</span></span><br><span class="line"><span class="attr">    size:</span></span><br></pre></td></tr></table></figure>
+<p>然后再执行<code>hexo clean &amp;&amp; hexo generate</code>命令清除并重新生成文件，应该就可以了。</p>
 
       
     </div>
@@ -666,7 +700,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-浏览数量："><span class="nav-number">1.</span> <span class="nav-text">1.浏览数量：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-评论系统"><span class="nav-number">2.</span> <span class="nav-text">2.评论系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-解决图片无法加载的问题"><span class="nav-number">3.</span> <span class="nav-text">3.解决图片无法加载的问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-添加阅读全文"><span class="nav-number">4.</span> <span class="nav-text">4.添加阅读全文</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-搜索服务Local-Search"><span class="nav-number">5.</span> <span class="nav-text">5.搜索服务Local Search</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-设置博客字数统计"><span class="nav-number">6.</span> <span class="nav-text">6.设置博客字数统计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-提交搜索引擎（Google-百度）"><span class="nav-number">7.</span> <span class="nav-text">7.提交搜索引擎（Google 百度）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#验证网站"><span class="nav-number">7.0.0.1.</span> <span class="nav-text">验证网站</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-浏览数量："><span class="nav-number">1.</span> <span class="nav-text">1.浏览数量：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-评论系统"><span class="nav-number">2.</span> <span class="nav-text">2.评论系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-解决图片无法加载的问题"><span class="nav-number">3.</span> <span class="nav-text">3.解决图片无法加载的问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-添加阅读全文"><span class="nav-number">4.</span> <span class="nav-text">4.添加阅读全文</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-搜索服务Local-Search"><span class="nav-number">5.</span> <span class="nav-text">5.搜索服务Local Search</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-设置博客字数统计"><span class="nav-number">6.</span> <span class="nav-text">6.设置博客字数统计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-提交搜索引擎（Google-百度）"><span class="nav-number">7.</span> <span class="nav-text">7.提交搜索引擎（Google 百度）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#验证网站"><span class="nav-number">7.0.0.1.</span> <span class="nav-text">验证网站</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#8-修改字体"><span class="nav-number">8.</span> <span class="nav-text">8.修改字体</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#样式文件"><span class="nav-number">9.</span> <span class="nav-text">样式文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义字体"><span class="nav-number">10.</span> <span class="nav-text">自定义字体</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#字体文件"><span class="nav-number">10.1.</span> <span class="nav-text">字体文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码块使用字体"><span class="nav-number">10.2.</span> <span class="nav-text">代码块使用字体</span></a></li></ol></li></div>
             
 
           </div>
@@ -700,7 +734,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">1.3k</span>
+    <span title="Site words total count">2k</span>
   
 </div>
 
