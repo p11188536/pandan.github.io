@@ -1823,7 +1823,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #f9006f;
+  background: #9dffb5;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3122,16 +3122,8 @@ pre .javascript .function {
   }
 }
 body {
-  background: url("ev-232339-unsplash.jpg");
+  background: url("/images/ev-232339-unsplash.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: 50% 50%;
-}
-@font-face {
-  font-family: Pacifico;
-  src: url("Pacifico-Regular.ttf");
-}
-@font-face {
-  font-family: ZCOOL XiaoWei;
-  src: url("ZCOOLXiaoWei-Regular.ttf");
 }
