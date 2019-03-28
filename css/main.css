@@ -185,7 +185,7 @@ th {
 }
 body {
   position: relative;
-  font-family: 'NotoSerifSC-Light', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'ZCOOLXiaoWei-Regular', "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 14px;
   line-height: 2;
   color: #555;
@@ -216,7 +216,7 @@ h6 {
   padding: 0;
   font-weight: bold;
   line-height: 1.5;
-  font-family: 'NotoSerifSC-SemiBold', 'NotoSerifSC-Light', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'ZCOOLXiaoWei-Regular', 'ZCOOLXiaoWei-Regular', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 h2,
 h3,
@@ -493,7 +493,7 @@ pre,
 }
 pre,
 code {
-  font-family: consolas, Menlo, "PingFang SC", "Microsoft YaHei", monospace;
+  font-family: 'ZCOOLXiaoWei-Regular', consolas, Menlo, "PingFang SC", "Microsoft YaHei", monospace;
 }
 code {
   padding: 2px 4px;
@@ -1131,7 +1131,7 @@ pre .javascript .function {
   line-height: 36px;
   font-size: 24px;
   font-weight: normal;
-  font-family: 'Pacifico', 'NotoSerifSC-Light', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Pacifico-Regular', 'ZCOOLXiaoWei-Regular', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 .site-subtitle {
   margin-top: 10px;
@@ -1220,7 +1220,7 @@ pre .javascript .function {
   opacity: 0;
 }
 .post-body {
-  font-family: 'NotoSerifSC-Light', 'NotoSerifSC-Light', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'ZCOOLXiaoWei-Regular', 'ZCOOLXiaoWei-Regular', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 @media (max-width: 767px) {
   .post-body {
@@ -1498,7 +1498,7 @@ pre .javascript .function {
 .posts-expand .post-meta {
   margin: 3px 0 60px 0;
   color: #999;
-  font-family: 'NotoSerifSC-Light', 'NotoSerifSC-Light', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'ZCOOLXiaoWei-Regular', 'ZCOOLXiaoWei-Regular', "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 12px;
   text-align: center;
 }
@@ -1823,7 +1823,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #6aff04;
+  background: #988860;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3121,19 +3121,17 @@ pre .javascript .function {
     margin: 8px 0 0;
   }
 }
+body {
+  background: url("andreas-nextvoyagepl-1427844-unsplash.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 50% 50%;
+}
 @font-face {
   font-family: Pacifico-Regular;
-  src: url("https://fonts.googleapis.com/css?family=Libre+Barcode+39");
-}
-@font-face {
-  font-family: NotoSerifSC-Light;
-  src: url("/fonts/NotoSerifSC-Light.ttf");
-}
-@font-face {
-  font-family: NotoSerifSC-SemiBold;
-  src: url("/fonts/NotoSerifSC-SemiBold.ttf");
+  src: url("Pacifico-Regular.ttf");
 }
 @font-face {
   font-family: ZCOOLXiaoWei-Regular;
-  src: url("https://fonts.googleapis.com/css?family=ZCOOL+XiaoWei&subset=chinese-simplified");
+  src: url("ZCOOLXiaoWei-Regular.ttf");
 }
