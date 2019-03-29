@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.yumz-p.xyz/about/index.html</loc>
+    
+    <lastmod>2019-03-29T07:28:56.945Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.yumz-p.xyz//404.html</loc>
     
     <lastmod>2019-03-29T06:57:45.123Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>http://www.yumz-p.xyz/2019/03/24/hello-world/</loc>
     
     <lastmod>2019-03-29T06:25:34.442Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yumz-p.xyz/about/index.html</loc>
-    
-    <lastmod>2019-03-29T05:05:38.538Z</lastmod>
     
   </url>
   
