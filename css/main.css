@@ -1865,7 +1865,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ffc1ad;
+  background: #58cda8;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2721,7 +2721,7 @@ embed {
 }
 @media screen and (min-width: 1200px) {
   body {
-    background: url("/images/ev-232339-unsplash.jpg");
+    background: url("http://pp2ca88li.bkt.clouddn.com/ev-232339-unsplash.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: 50% 50%;
