@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>YuMZ P</title>
+  <title>YuMZP</title>
   
   
   <link href="/atom.xml" rel="self"/>
@@ -41,11 +41,11 @@
   </entry>
   
   <entry>
-    <title>hexo+next博客个性化</title>
+    <title>Hexo+NexT博客个性化</title>
     <link href="http://yumz-p.xyz/2019/03/27/hexonextcomment/"/>
     <id>http://yumz-p.xyz/2019/03/27/hexonextcomment/</id>
     <published>2019-03-27T15:21:38.000Z</published>
-    <updated>2019-03-28T13:11:36.860Z</updated>
+    <updated>2019-03-31T05:32:39.203Z</updated>
     
     <summary type="html">
     
