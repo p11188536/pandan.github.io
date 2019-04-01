@@ -146,7 +146,7 @@
 <meta property="og:site_name" content="YuMZ&#39;s Blog">
 <meta property="og:description" content="汇编语言1.挂载相关的信息mount c /Users/panyumingzhi/masm （注意这里可以使用alt+空格+enter全屏） 2.转到c:c: 3.定义数据：db 一个字节 dw 一个字表示两个字节 dd 两个字，表示4个字节 dup 表示数据重复的指令db N dup(xx)     ;      dup表示定义的数据，N表示重复的个数dw N dup(xx)     ;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-01T08:51:16.022Z">
+<meta property="og:updated_time" content="2019-04-01T08:52:59.601Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="汇编语言">
 <meta name="twitter:description" content="汇编语言1.挂载相关的信息mount c /Users/panyumingzhi/masm （注意这里可以使用alt+空格+enter全屏） 2.转到c:c: 3.定义数据：db 一个字节 dw 一个字表示两个字节 dd 两个字，表示4个字节 dup 表示数据重复的指令db N dup(xx)     ;      dup表示定义的数据，N表示重复的个数dw N dup(xx)     ;">
@@ -462,6 +462,7 @@
 <h4 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h4><p>当使用 d 命令时，Debug 以两个部分显示内存内容:十六进制部分(每个字节的值都用十六 进制格式表示)和 ASCII 码部分(每个字节的值都用 ASCII 码字符表示)。<strong>每个非打印字符在显示的 ASCII 部分由句号 (.) 表示。</strong> <strong><em>每个显示行显示 16 字节的内容</em></strong>，<strong>第 8 字节和第 9 字节之间有一个连字符</strong>。每个显示行从 16 字节的边界上开始。     </p>
 <p><code>g</code>:按地址执行</p>
 <p><code>q</code>:退出</p>
+<a id="more"></a>
 <h3 id="E"><a href="#E" class="headerlink" title="E:"></a>E:</h3><p>将数据输入到内存中指定的地址。<br>可以按十六进制或 ASCII 格式键入数据。以前存储在指定位置的任何数据全部丢失。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">e address [list]</span><br></pre></td></tr></table></figure>
 <table>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yumz-p.xyz/"/>
-  <updated>2019-04-01T08:49:49.192Z</updated>
+  <updated>2019-04-01T08:53:11.113Z</updated>
   <id>http://yumz-p.xyz/</id>
   
   <author>
@@ -21,17 +21,18 @@
     <link href="http://yumz-p.xyz/2019/04/01/%E6%B1%87%E7%BC%96%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%AE%9E%E9%AA%8C%E6%80%BB%E7%BB%93/"/>
     <id>http://yumz-p.xyz/2019/04/01/汇编第一次实验总结/</id>
     <published>2019-04-01T08:43:33.000Z</published>
-    <updated>2019-04-01T08:49:49.192Z</updated>
+    <updated>2019-04-01T08:53:11.113Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          
-        
-      
+      &lt;p&gt;本文为第一次汇编语言实验整理的资料与总结，最后将汇总于&lt;a href=&quot;https://yumz-p.xyz/2019/03/25/汇编语言/&quot;&gt;汇编语言&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&quot;1-挂载相关的信息&quot;&gt;&lt;a href=&quot;#1-挂载相关的信息&quot; class=&quot;headerlink&quot; title=&quot;1.挂载相关的信息&quot;&gt;&lt;/a&gt;1.挂载相关的信息&lt;/h2&gt;&lt;p&gt;&lt;code&gt;mount c /Users/panyumingzhi/masm&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;（注意这里可以使用&lt;code&gt;alt&lt;/code&gt;+&lt;code&gt;空格&lt;/code&gt;+&lt;code&gt;enter&lt;/code&gt;全屏）&lt;/p&gt;
+&lt;h2 id=&quot;2-转到c&quot;&gt;&lt;a href=&quot;#2-转到c&quot; class=&quot;headerlink&quot; title=&quot;2.转到c:&quot;&gt;&lt;/a&gt;2.转到c:&lt;/h2&gt;&lt;p&gt;&lt;code&gt;c:&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&quot;3-定义数据：&quot;&gt;&lt;a href=&quot;#3-定义数据：&quot; class=&quot;headerlink&quot; title=&quot;3.定义数据：&quot;&gt;&lt;/a&gt;3.定义数据：&lt;/h2&gt;&lt;p&gt;&lt;1&gt;db 一个字节&lt;/1&gt;&lt;/p&gt;
+&lt;p&gt;&lt;2&gt;dw 一个字表示两个字节&lt;/2&gt;&lt;/p&gt;
+&lt;p&gt;&lt;3&gt;dd 两个字，表示4个字节&lt;/3&gt;&lt;/p&gt;
+&lt;p&gt;&lt;4&gt;dup 表示数据重复的指令&lt;br&gt;db N dup(xx)     ;      dup表示定义的数据，N表示重复的个数&lt;br&gt;dw N dup(xx)     ;     dup表示定义的数据，N表示重复的个数&lt;br&gt;dd N dup(xx)     ;     dup表示定义的数据，N表示重复的个数&lt;/4&gt;&lt;/p&gt;
     
     </summary>
     
@@ -92,17 +93,27 @@
     <link href="http://yumz-p.xyz/2019/03/25/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/"/>
     <id>http://yumz-p.xyz/2019/03/25/汇编语言/</id>
     <published>2019-03-25T09:30:30.000Z</published>
-    <updated>2019-04-01T08:51:16.022Z</updated>
+    <updated>2019-04-01T08:52:59.601Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          
-        
-      
+      &lt;h1 id=&quot;汇编语言&quot;&gt;&lt;a href=&quot;#汇编语言&quot; class=&quot;headerlink&quot; title=&quot;汇编语言&quot;&gt;&lt;/a&gt;汇编语言&lt;/h1&gt;&lt;h2 id=&quot;1-挂载相关的信息&quot;&gt;&lt;a href=&quot;#1-挂载相关的信息&quot; class=&quot;headerlink&quot; title=&quot;1.挂载相关的信息&quot;&gt;&lt;/a&gt;1.挂载相关的信息&lt;/h2&gt;&lt;p&gt;&lt;code&gt;mount c /Users/panyumingzhi/masm&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;（注意这里可以使用&lt;code&gt;alt&lt;/code&gt;+&lt;code&gt;空格&lt;/code&gt;+&lt;code&gt;enter&lt;/code&gt;全屏）&lt;/p&gt;
+&lt;h2 id=&quot;2-转到c&quot;&gt;&lt;a href=&quot;#2-转到c&quot; class=&quot;headerlink&quot; title=&quot;2.转到c:&quot;&gt;&lt;/a&gt;2.转到c:&lt;/h2&gt;&lt;p&gt;&lt;code&gt;c:&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&quot;3-定义数据：&quot;&gt;&lt;a href=&quot;#3-定义数据：&quot; class=&quot;headerlink&quot; title=&quot;3.定义数据：&quot;&gt;&lt;/a&gt;3.定义数据：&lt;/h2&gt;&lt;p&gt;&lt;1&gt;db 一个字节&lt;/1&gt;&lt;/p&gt;
+&lt;p&gt;&lt;2&gt;dw 一个字表示两个字节&lt;/2&gt;&lt;/p&gt;
+&lt;p&gt;&lt;3&gt;dd 两个字，表示4个字节&lt;/3&gt;&lt;/p&gt;
+&lt;p&gt;&lt;4&gt;dup 表示数据重复的指令&lt;br&gt;db N dup(xx)     ;      dup表示定义的数据，N表示重复的个数&lt;br&gt;dw N dup(xx)     ;     dup表示定义的数据，N表示重复的个数&lt;br&gt;dd N dup(xx)     ;     dup表示定义的数据，N表示重复的个数&lt;/4&gt;&lt;/p&gt;
+&lt;h2 id=&quot;4-debug指令：&quot;&gt;&lt;a href=&quot;#4-debug指令：&quot; class=&quot;headerlink&quot; title=&quot;4.debug指令：&quot;&gt;&lt;/a&gt;4.debug指令：&lt;/h2&gt;&lt;p&gt;&lt;code&gt;r&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;加寄存器的名字，修改寄存器的内容&lt;/p&gt;
+&lt;p&gt;2.显示寄存器的内容&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;a&lt;/code&gt;:汇编&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;u&lt;/code&gt;:显示写的程序的内容，反汇编&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;t&lt;/code&gt;:单步执行&lt;/p&gt;
+&lt;h3 id=&quot;D&quot;&gt;&lt;a href=&quot;#D&quot; class=&quot;headerlink&quot; title=&quot;D&quot;&gt;&lt;/a&gt;D&lt;/h3&gt;&lt;p&gt; 显示一定范围内存地址的内容。&lt;br&gt; d [range]&lt;br&gt;| 符号  | 含义                                                         |&lt;br&gt;| —– | ———————————————————— |&lt;br&gt;| range | 指定要显示其内容的内存区域的起始和结束地址，或起始地址和长度。有关有效的 range 值 的信息，请单击“相关主题”列表中的“Debug 说明”。如果不指定 range，Debug 程序将 从以前 d 命令中所指定的地址范围的末尾开始显示 128 个字节的内容。 |&lt;/p&gt;
+&lt;h4 id=&quot;说明：&quot;&gt;&lt;a href=&quot;#说明：&quot; class=&quot;headerlink&quot; title=&quot;说明：&quot;&gt;&lt;/a&gt;说明：&lt;/h4&gt;&lt;p&gt;当使用 d 命令时，Debug 以两个部分显示内存内容:十六进制部分(每个字节的值都用十六 进制格式表示)和 ASCII 码部分(每个字节的值都用 ASCII 码字符表示)。&lt;strong&gt;每个非打印字符在显示的 ASCII 部分由句号 (.) 表示。&lt;/strong&gt; &lt;strong&gt;&lt;em&gt;每个显示行显示 16 字节的内容&lt;/em&gt;&lt;/strong&gt;，&lt;strong&gt;第 8 字节和第 9 字节之间有一个连字符&lt;/strong&gt;。每个显示行从 16 字节的边界上开始。     &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;g&lt;/code&gt;:按地址执行&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;q&lt;/code&gt;:退出&lt;/p&gt;
     
     </summary>
     
