@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yumz-p.xyz/"/>
-  <updated>2019-04-01T15:14:02.238Z</updated>
+  <updated>2019-04-05T16:09:22.398Z</updated>
   <id>http://yumz-p.xyz/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>4.6</title>
+    <link href="http://yumz-p.xyz/2019/04/06/4-6/"/>
+    <id>http://yumz-p.xyz/2019/04/06/4-6/</id>
+    <published>2019-04-05T16:04:23.000Z</published>
+    <updated>2019-04-05T16:09:22.398Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          
+        
+      
+    
+    </summary>
+    
+    
+      <category term="myLife" scheme="http://yumz-p.xyz/tags/myLife/"/>
+    
+  </entry>
   
   <entry>
     <title>汇编第一次实验总结</title>
