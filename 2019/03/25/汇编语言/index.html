@@ -138,18 +138,18 @@
 
 
 
-<meta name="description" content="汇编语言1.挂载相关的信息mount c /Users/panyumingzhi/masm （注意这里可以使用alt+空格+enter全屏） 2.转到c:c: 3.定义数据：db 一个字节 dw 一个字表示两个字节 dd 两个字，表示4个字节 dup 表示数据重复的指令db N dup(xx)     ;      dup表示定义的数据，N表示重复的个数dw N dup(xx)     ;">
+<meta name="description" content="1.挂载相关的信息mount c /Users/panyumingzhi/masm （注意这里可以使用alt+空格+enter全屏） 2.转到c:c: 3.定义数据：db 一个字节 dw 一个字表示两个字节 dd 两个字，表示4个字节 dup 表示数据重复的指令db N dup(xx)     ;      dup表示定义的数据，N表示重复的个数dw N dup(xx)     ;     dup">
 <meta name="keywords" content="汇编语言">
 <meta property="og:type" content="article">
 <meta property="og:title" content="汇编语言">
 <meta property="og:url" content="http://yumz-p.xyz/2019/03/25/汇编语言/index.html">
 <meta property="og:site_name" content="YuMZ&#39;s Blog">
-<meta property="og:description" content="汇编语言1.挂载相关的信息mount c /Users/panyumingzhi/masm （注意这里可以使用alt+空格+enter全屏） 2.转到c:c: 3.定义数据：db 一个字节 dw 一个字表示两个字节 dd 两个字，表示4个字节 dup 表示数据重复的指令db N dup(xx)     ;      dup表示定义的数据，N表示重复的个数dw N dup(xx)     ;">
+<meta property="og:description" content="1.挂载相关的信息mount c /Users/panyumingzhi/masm （注意这里可以使用alt+空格+enter全屏） 2.转到c:c: 3.定义数据：db 一个字节 dw 一个字表示两个字节 dd 两个字，表示4个字节 dup 表示数据重复的指令db N dup(xx)     ;      dup表示定义的数据，N表示重复的个数dw N dup(xx)     ;     dup">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-01T08:52:59.601Z">
+<meta property="og:updated_time" content="2019-04-06T10:30:25.767Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="汇编语言">
-<meta name="twitter:description" content="汇编语言1.挂载相关的信息mount c /Users/panyumingzhi/masm （注意这里可以使用alt+空格+enter全屏） 2.转到c:c: 3.定义数据：db 一个字节 dw 一个字表示两个字节 dd 两个字，表示4个字节 dup 表示数据重复的指令db N dup(xx)     ;      dup表示定义的数据，N表示重复的个数dw N dup(xx)     ;">
+<meta name="twitter:description" content="1.挂载相关的信息mount c /Users/panyumingzhi/masm （注意这里可以使用alt+空格+enter全屏） 2.转到c:c: 3.定义数据：db 一个字节 dw 一个字表示两个字节 dd 两个字，表示4个字节 dup 表示数据重复的指令db N dup(xx)     ;      dup表示定义的数据，N表示重复的个数dw N dup(xx)     ;     dup">
 
 
 
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1.4k
+                  1.8k
                 </span>
               
 
@@ -445,25 +445,53 @@
       
 
       
-        <h1 id="汇编语言"><a href="#汇编语言" class="headerlink" title="汇编语言"></a>汇编语言</h1><h2 id="1-挂载相关的信息"><a href="#1-挂载相关的信息" class="headerlink" title="1.挂载相关的信息"></a>1.挂载相关的信息</h2><p><code>mount c /Users/panyumingzhi/masm</code></p>
+        <h1 id="1-挂载相关的信息"><a href="#1-挂载相关的信息" class="headerlink" title="1.挂载相关的信息"></a>1.挂载相关的信息</h1><p><code>mount c /Users/panyumingzhi/masm</code></p>
 <p>（注意这里可以使用<code>alt</code>+<code>空格</code>+<code>enter</code>全屏）</p>
-<h2 id="2-转到c"><a href="#2-转到c" class="headerlink" title="2.转到c:"></a>2.转到c:</h2><p><code>c:</code></p>
-<h2 id="3-定义数据："><a href="#3-定义数据：" class="headerlink" title="3.定义数据："></a>3.定义数据：</h2><p><1>db 一个字节</1></p>
+<h1 id="2-转到c"><a href="#2-转到c" class="headerlink" title="2.转到c:"></a>2.转到c:</h1><p><code>c:</code></p>
+<h1 id="3-定义数据："><a href="#3-定义数据：" class="headerlink" title="3.定义数据："></a>3.定义数据：</h1><p><1>db 一个字节</1></p>
 <p><2>dw 一个字表示两个字节</2></p>
 <p><3>dd 两个字，表示4个字节</3></p>
 <p><4>dup 表示数据重复的指令<br>db N dup(xx)     ;      dup表示定义的数据，N表示重复的个数<br>dw N dup(xx)     ;     dup表示定义的数据，N表示重复的个数<br>dd N dup(xx)     ;     dup表示定义的数据，N表示重复的个数</4></p>
-<h2 id="4-debug指令："><a href="#4-debug指令：" class="headerlink" title="4.debug指令："></a>4.debug指令：</h2><p><code>r</code>:</p>
-<p>加寄存器的名字，修改寄存器的内容</p>
-<p>2.显示寄存器的内容</p>
-<p><code>a</code>:汇编</p>
+<h1 id="4-Debug指令："><a href="#4-Debug指令：" class="headerlink" title="4.Debug指令："></a>4.Debug指令：</h1><p><code>a</code>:汇编</p>
 <p><code>u</code>:显示写的程序的内容，反汇编</p>
 <p><code>t</code>:单步执行</p>
-<h3 id="D"><a href="#D" class="headerlink" title="D"></a>D</h3><p> 显示一定范围内存地址的内容。<br> d [range]<br>| 符号  | 含义                                                         |<br>| —– | ———————————————————— |<br>| range | 指定要显示其内容的内存区域的起始和结束地址，或起始地址和长度。有关有效的 range 值 的信息，请单击“相关主题”列表中的“Debug 说明”。如果不指定 range，Debug 程序将 从以前 d 命令中所指定的地址范围的末尾开始显示 128 个字节的内容。 |</p>
-<h4 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h4><p>当使用 d 命令时，Debug 以两个部分显示内存内容:十六进制部分(每个字节的值都用十六 进制格式表示)和 ASCII 码部分(每个字节的值都用 ASCII 码字符表示)。<strong>每个非打印字符在显示的 ASCII 部分由句号 (.) 表示。</strong> <strong><em>每个显示行显示 16 字节的内容</em></strong>，<strong>第 8 字节和第 9 字节之间有一个连字符</strong>。每个显示行从 16 字节的边界上开始。     </p>
 <p><code>g</code>:按地址执行</p>
 <p><code>q</code>:退出</p>
-<a id="more"></a>
-<h3 id="E"><a href="#E" class="headerlink" title="E:"></a>E:</h3><p>将数据输入到内存中指定的地址。<br>可以按十六进制或 ASCII 格式键入数据。以前存储在指定位置的任何数据全部丢失。</p>
+<h2 id="R"><a href="#R" class="headerlink" title="R"></a>R</h2><p>显示或改变一个或多个 CPU 寄存器的内容。</p>
+<p>r [register-name]</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>register-name</td>
+<td>指定要显示其内容的寄存器名。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><p>只查看标志的状态，键入命令<code>rf</code>;</p>
+<p>要查看所有寄存器的内容、所有标记的状态和当前位置的指令解码表，键入<code>r</code>;</p>
+<h2 id="D"><a href="#D" class="headerlink" title="D"></a>D</h2><p> 显示一定范围内存地址的内容。<br> d [range]  </p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>range</td>
+<td>指定要显示其内容的内存区域的起始和结束地址，或起始地址和长度。有关有效的 range 值 的信息，请单击“相关主题”列表中的“Debug 说明”。如果不指定 range，Debug 程序将 从以前 d 命令中所指定的地址范围的末尾开始显示 128 个字节的内容。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="说明：-1"><a href="#说明：-1" class="headerlink" title="说明："></a>说明：</h3><p>当使用 d 命令时，Debug 以两个部分显示内存内容:十六进制部分(每个字节的值都用十六 进制格式表示)和 ASCII 码部分(每个字节的值都用 ASCII 码字符表示)。<strong>每个非打印字符在显示的 ASCII 部分由句号 (.) 表示。</strong> <strong><em>每个显示行显示 16 字节的内容</em></strong>，<strong>第 8 字节和第 9 字节之间有一个连字符</strong>。每个显示行从 16 字节的边界上开始。     </p>
+<h2 id="E"><a href="#E" class="headerlink" title="E:"></a>E:</h2><p>将数据输入到内存中指定的地址。<br>可以按十六进制或 ASCII 格式键入数据。以前存储在指定位置的任何数据全部丢失。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">e address [list]</span><br></pre></td></tr></table></figure>
 <table>
 <thead>
@@ -483,11 +511,11 @@
 </tr>
 </tbody>
 </table>
-<h4 id="没有指定可选的-list-参数的值情况下指定-address-的值"><a href="#没有指定可选的-list-参数的值情况下指定-address-的值" class="headerlink" title="没有指定可选的 list 参数的值情况下指定 address 的值:"></a>没有指定可选的 list 参数的值情况下指定 address 的值:</h4><p>Debug 将显示地址和内容，在下一行重复地址，并等待您的输入。此时，可以执行:</p>
+<h3 id="没有指定可选的-list-参数的值情况下指定-address-的值"><a href="#没有指定可选的-list-参数的值情况下指定-address-的值" class="headerlink" title="没有指定可选的 list 参数的值情况下指定 address 的值:"></a>没有指定可选的 list 参数的值情况下指定 address 的值:</h3><p>Debug 将显示地址和内容，在下一行重复地址，并等待您的输入。此时，可以执行:</p>
 <p>(1)替换字节值。为此，请在当前值后键入新值。如果键入的值不是有效的十六进制值，或该 值包含两个以上的数字，则 Debug 不会回显无效或额外的字符。 进入下一个字节。为此，请按 SPACEBAR(空格键)。要更改该字节中的值，请在当前值后键 入新值。如果按 SPACEBAR(空格键)时，移动超过了 8 位界限，Debug 程序将显示新的一 行并在行首显示新地址。<br> (2)返回到前一个字节。为此，请按 HYPHEN 键 (-)。可以反复按 HYPHEN 键 (-) 向后移动超过多个字节。在按 HYPHEN 时，Debug 开始新行并显示当前地址和字节值。<br> 停止执行 e 命令。为此，请按 ENTER 键。在任何字节位置都可以按 ENTER。</p>
-<h4 id="使用-list-参数"><a href="#使用-list-参数" class="headerlink" title="使用 list 参数:"></a>使用 list 参数:</h4><p>如果指定 list 参数的值，随后的 e 命令将使用列表中的值替换现有的字节值。如果发生错误，将不更改任何字节值。 </p>
+<h3 id="使用-list-参数"><a href="#使用-list-参数" class="headerlink" title="使用 list 参数:"></a>使用 list 参数:</h3><p>如果指定 list 参数的值，随后的 e 命令将使用列表中的值替换现有的字节值。如果发生错误，将不更改任何字节值。 </p>
 <p>List 值可以是十六进制字节或字符串。使用空格、逗号或制表符来分隔值。必须将字符串包 括在单或双引号中。 </p>
-<h3 id="F"><a href="#F" class="headerlink" title="F:"></a>F:</h3><p>使用指定的值填充指定内存区域中的地址。<br>可以指定十六进制或 ASCII 格式表示的数据。任何以前存储在指定位置的数据将会丢失。</p>
+<h2 id="F"><a href="#F" class="headerlink" title="F:"></a>F:</h2><p>使用指定的值填充指定内存区域中的地址。<br>可以指定十六进制或 ASCII 格式表示的数据。任何以前存储在指定位置的数据将会丢失。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f range list</span><br></pre></td></tr></table></figure>
 <table>
 <thead>
@@ -507,15 +535,92 @@
 </tr>
 </tbody>
 </table>
-<h4 id="说明：-1"><a href="#说明：-1" class="headerlink" title="说明："></a>说明：</h4><p>(1)如果 range 包含的字节数&gt; list 中的数值，Debug 将在 list 中反复指派值，直到 range 中的所有字节全部填充。 </p>
+<h3 id="说明：-2"><a href="#说明：-2" class="headerlink" title="说明："></a>说明：</h3><p>(1)如果 range 包含的字节数&gt; list 中的数值，Debug 将在 list 中反复指派值，直到 range 中的所有字节全部填充。 </p>
 <p>(2)如果在 range 中的任何内存损坏或不存在，Debug 将显示错误消息并停止 f 命令。<br>(3)如果 list 包含的数值多于 range 中的字节数，Debug 将忽略 list 中额外的值。 </p>
-<h2 id="5-汇编操作符"><a href="#5-汇编操作符" class="headerlink" title="5.汇编操作符"></a>5.汇编操作符</h2><h3 id="INC和DEC"><a href="#INC和DEC" class="headerlink" title="INC和DEC"></a>INC和DEC</h3><h4 id="INC：加1指令"><a href="#INC：加1指令" class="headerlink" title="INC：加1指令"></a>INC：加1指令</h4><p><code>inc a</code>相当于 <code>add a,1 ;i++</code><br>优点:速度比sub指令快，占用空间小<br>这条指令执行结果影响AF、OF、PF、SF、ZF标志位,但不影响CF进位标志位.</p>
-<h4 id="DEC：减1指令"><a href="#DEC：减1指令" class="headerlink" title="DEC：减1指令"></a>DEC：减1指令</h4><p><code>dec a</code> 相当于<code>sub a,1</code></p>
+<h1 id="5-汇编操作符"><a href="#5-汇编操作符" class="headerlink" title="5.汇编操作符"></a>5.汇编操作符</h1><h2 id="INC和DEC"><a href="#INC和DEC" class="headerlink" title="INC和DEC"></a>INC和DEC</h2><h3 id="INC：加1指令"><a href="#INC：加1指令" class="headerlink" title="INC：加1指令"></a>INC：加1指令</h3><p><code>inc a</code>相当于 <code>add a,1 ;i++</code><br>优点:速度比sub指令快，占用空间小<br>这条指令执行结果影响AF、OF、PF、SF、ZF标志位,但不影响CF进位标志位.</p>
+<h3 id="DEC：减1指令"><a href="#DEC：减1指令" class="headerlink" title="DEC：减1指令"></a>DEC：减1指令</h3><p><code>dec a</code> 相当于<code>sub a,1</code></p>
 <p>优点 速度比sub指令快，占用空间小<br>这条指令执行结果影响AF、OF、PF、SF、ZF标志位,但不影响CF进位标志位.</p>
-<h3 id="6-寄存器"><a href="#6-寄存器" class="headerlink" title="6.寄存器"></a>6.寄存器</h3><p>AX BX CX DX是CPU内部的通用寄存器中的数据寄存器,数据寄存器一般用于存放参与运算的数据或运算的结果,每一个数据寄存器都是16位的(即16个二进制位),但又<strong>可以将高,低8位分别作为两个独立的8位寄存器使用</strong>.<strong>它们的高8位记作AH,BH,CH,DH,低8位记作AL,BL,CL,DL.</strong>这种灵活的使用方法给编程带来极大的方便,既可以处理16位数据,也能处理8位数据.</p>
-<hr>
-<p>to be continue</p>
-<hr>
+<h1 id="6-标志位"><a href="#6-标志位" class="headerlink" title="6.标志位"></a>6.标志位</h1><h2 id="条件码-状态-标志"><a href="#条件码-状态-标志" class="headerlink" title="条件码(状态)标志"></a>条件码(状态)标志</h2><p>用来记录程序中运行结果的状态信息。</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+<th>值为1</th>
+<th>值为0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OF(Overflow)</td>
+<td>溢出标志（指字节(字)运算结果超过了所能表数的范围）</td>
+<td>溢出（ov）</td>
+<td>未溢出（nv）</td>
+</tr>
+<tr>
+<td>SF(Sign)</td>
+<td>符号标志（与运算结果的最高位相同）</td>
+<td>结果为负(ng)</td>
+<td>结果为正(pl)</td>
+</tr>
+<tr>
+<td>ZF(Zero)</td>
+<td>零标志</td>
+<td>运算结果为零(zr)</td>
+<td>运算结果不为零(nz)</td>
+</tr>
+<tr>
+<td>CF(Carry)</td>
+<td>进位标志</td>
+<td>最高有效位产生进位或借位(cy)</td>
+<td>最高有效位未产生进位或借位(nc)</td>
+</tr>
+<tr>
+<td>AF(Auxiliary Carry)</td>
+<td>辅助进位标志（执行十进制运算指令时，记录运算结果中低半字节(最低4位)向高半字节(即D3向D4)的进位情况。 ）</td>
+<td>D3向D4有进位或借位(ac)</td>
+<td>D3向D4没有进位或借位(na)</td>
+</tr>
+<tr>
+<td>PF(Parity)</td>
+<td>奇偶标志（运算结果的低8位中，<strong>“</strong>1<strong>”</strong>的个数）</td>
+<td>偶数</td>
+<td>奇数</td>
+</tr>
+</tbody>
+</table>
+<h2 id="控制标志"><a href="#控制标志" class="headerlink" title="控制标志"></a>控制标志</h2><p>控制标志控制处理器的操作，要通过专门的指令才能使控制标志发生变化</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+<th>值为1</th>
+<th>值为0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DF(Direction)</td>
+<td>方向标志(用于控制串操作，指示串操作时操作数地址的增减方向)</td>
+<td>串操作后使变址寄存器SI、DI自动减量(dn)</td>
+<td>串操作后，使SI、DI自动增量(up)</td>
+</tr>
+<tr>
+<td>IF(Interrupt)</td>
+<td>中断标志（只对外部可屏蔽中断请求(INTR)起作用）</td>
+<td>允许CPU响应INTR（ei）</td>
+<td>禁止响应INTR(di)</td>
+</tr>
+<tr>
+<td>TF(Trap)</td>
+<td>陷阱标志（用于程序调试）</td>
+<td>CPU处于单步运行方式</td>
+<td>CPU处于正常工作方式</td>
+</tr>
+</tbody>
+</table>
+<h1 id="7-寄存器"><a href="#7-寄存器" class="headerlink" title="7.寄存器"></a>7.寄存器</h1><p>AX BX CX DX是CPU内部的通用寄存器中的数据寄存器,数据寄存器一般用于存放参与运算的数据或运算的结果,每一个数据寄存器都是16位的(即16个二进制位),但又<strong>可以将高,低8位分别作为两个独立的8位寄存器使用</strong>.<strong>它们的高8位记作AH,BH,CH,DH,低8位记作AL,BL,CL,DL.</strong>这种灵活的使用方法给编程带来极大的方便,既可以处理16位数据,也能处理8位数据.</p>
 
       
     </div>
@@ -673,7 +778,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -742,7 +847,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#汇编语言"><span class="nav-number">1.</span> <span class="nav-text">汇编语言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-挂载相关的信息"><span class="nav-number">1.1.</span> <span class="nav-text">1.挂载相关的信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-转到c"><span class="nav-number">1.2.</span> <span class="nav-text">2.转到c:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-定义数据："><span class="nav-number">1.3.</span> <span class="nav-text">3.定义数据：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-debug指令："><span class="nav-number">1.4.</span> <span class="nav-text">4.debug指令：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#D"><span class="nav-number">1.4.1.</span> <span class="nav-text">D</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#说明："><span class="nav-number">1.4.1.1.</span> <span class="nav-text">说明：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#E"><span class="nav-number">1.4.2.</span> <span class="nav-text">E:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#没有指定可选的-list-参数的值情况下指定-address-的值"><span class="nav-number">1.4.2.1.</span> <span class="nav-text">没有指定可选的 list 参数的值情况下指定 address 的值:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用-list-参数"><span class="nav-number">1.4.2.2.</span> <span class="nav-text">使用 list 参数:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#F"><span class="nav-number">1.4.3.</span> <span class="nav-text">F:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#说明：-1"><span class="nav-number">1.4.3.1.</span> <span class="nav-text">说明：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-汇编操作符"><span class="nav-number">1.5.</span> <span class="nav-text">5.汇编操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#INC和DEC"><span class="nav-number">1.5.1.</span> <span class="nav-text">INC和DEC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#INC：加1指令"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">INC：加1指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DEC：减1指令"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">DEC：减1指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-寄存器"><span class="nav-number">1.5.2.</span> <span class="nav-text">6.寄存器</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-挂载相关的信息"><span class="nav-number">1.</span> <span class="nav-text">1.挂载相关的信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-转到c"><span class="nav-number">2.</span> <span class="nav-text">2.转到c:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-定义数据："><span class="nav-number">3.</span> <span class="nav-text">3.定义数据：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Debug指令："><span class="nav-number">4.</span> <span class="nav-text">4.Debug指令：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#R"><span class="nav-number">4.1.</span> <span class="nav-text">R</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#说明："><span class="nav-number">4.1.1.</span> <span class="nav-text">说明：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#D"><span class="nav-number">4.2.</span> <span class="nav-text">D</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#说明：-1"><span class="nav-number">4.2.1.</span> <span class="nav-text">说明：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#E"><span class="nav-number">4.3.</span> <span class="nav-text">E:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#没有指定可选的-list-参数的值情况下指定-address-的值"><span class="nav-number">4.3.1.</span> <span class="nav-text">没有指定可选的 list 参数的值情况下指定 address 的值:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-list-参数"><span class="nav-number">4.3.2.</span> <span class="nav-text">使用 list 参数:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#F"><span class="nav-number">4.4.</span> <span class="nav-text">F:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#说明：-2"><span class="nav-number">4.4.1.</span> <span class="nav-text">说明：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-汇编操作符"><span class="nav-number">5.</span> <span class="nav-text">5.汇编操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#INC和DEC"><span class="nav-number">5.1.</span> <span class="nav-text">INC和DEC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#INC：加1指令"><span class="nav-number">5.1.1.</span> <span class="nav-text">INC：加1指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DEC：减1指令"><span class="nav-number">5.1.2.</span> <span class="nav-text">DEC：减1指令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-标志位"><span class="nav-number">6.</span> <span class="nav-text">6.标志位</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#条件码-状态-标志"><span class="nav-number">6.1.</span> <span class="nav-text">条件码(状态)标志</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制标志"><span class="nav-number">6.2.</span> <span class="nav-text">控制标志</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-寄存器"><span class="nav-number">7.</span> <span class="nav-text">7.寄存器</span></a></li></ol></div>
             
 
           </div>
@@ -776,7 +881,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">4.9k</span>
+    <span title="Site words total count">4k</span>
   
 </div>
 
