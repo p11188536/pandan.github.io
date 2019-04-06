@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[4.6]]></title>
-    <url>%2F2019%2F04%2F06%2F4-6%2F</url>
-    <content type="text"><![CDATA[清明节的第一天，那种沉重感又来了。 啊，每次跟父母打完电话都有一种难以诉说的情绪。 是责任感？是负罪感？是思念？ 那种感觉真是难以形容，却久久不能停下。 我还是， 太弱了啊，身体上的，能力上的。 我好难过， 好难过。 这是 抑郁 吗？]]></content>
-      <tags>
-        <tag>myLife</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[RSS]]></title>
     <url>%2F2019%2F03%2F28%2Frssreader%2F</url>
     <content type="text"><![CDATA[之前，我是不太了解RSS阅读器的，但是今天忘记在更新自己博客时什么时候给博客加了一个RSS功能，于是非常费解，.hml怎么打开之后的文件打开为什么是乱码。 于是搜索到了一篇2006年的文章： 如何使用RSS 原来是这样的Orz，大概是上一个时代的Subscribe吧 另外，如果你跟我一样，使用了Chrome浏览器，也可以直接在浏览器里搜索到RSS阅读器。]]></content>
@@ -39,10 +31,5 @@
       <tags>
         <tag>leveldb</tag>
       </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Hello World]]></title>
-    <url>%2F2019%2F03%2F24%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
   </entry>
 </search>
