@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yumz-p.xyz/"/>
-  <updated>2019-03-28T13:24:55.336Z</updated>
+  <updated>2019-04-06T10:34:43.057Z</updated>
   <id>http://yumz-p.xyz/</id>
   
   <author>
@@ -21,17 +21,11 @@
     <link href="http://yumz-p.xyz/2019/03/28/rssreader/"/>
     <id>http://yumz-p.xyz/2019/03/28/rssreader/</id>
     <published>2019-03-28T12:53:15.000Z</published>
-    <updated>2019-03-28T13:24:55.336Z</updated>
+    <updated>2019-04-06T10:34:43.057Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          
-        
-      
+      &lt;p&gt;之前，我是不太了解RSS阅读器的，但是今天忘记在更新自己博客时什么时候给博客加了一个RSS功能，于是非常费解，&lt;code&gt;.hml&lt;/code&gt;怎么打开之后的文件打开为什么是乱码。&lt;/p&gt;
     
     </summary>
     
@@ -68,17 +62,12 @@
     <link href="http://yumz-p.xyz/2019/03/25/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/"/>
     <id>http://yumz-p.xyz/2019/03/25/汇编语言/</id>
     <published>2019-03-25T09:30:30.000Z</published>
-    <updated>2019-04-06T10:30:25.767Z</updated>
+    <updated>2019-04-06T10:34:36.896Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          
-        
-      
+      &lt;h1 id=&quot;1-挂载相关的信息&quot;&gt;&lt;a href=&quot;#1-挂载相关的信息&quot; class=&quot;headerlink&quot; title=&quot;1.挂载相关的信息&quot;&gt;&lt;/a&gt;1.挂载相关的信息&lt;/h1&gt;&lt;p&gt;&lt;code&gt;mount c /Users/panyumingzhi/masm&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;（注意这里可以使用&lt;code&gt;alt&lt;/code&gt;+&lt;code&gt;空格&lt;/code&gt;+&lt;code&gt;enter&lt;/code&gt;全屏）&lt;/p&gt;
     
     </summary>
     
