@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[数据库笔记]]></title>
     <url>%2F2019%2F07%2F06%2F%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0%2F</url>
-    <content type="text"><![CDATA[数据库NoSQL和SQLSQL（Structured Query Language）数据库，是指关系型数据库 NoSQL（Not Only SQL）数据库，是指非关系型数据库，不同于传统的关系型数据库，NoSQL不使用SQL作为查询语言，数据存储格式也不再需要固定的表格模式，比如使用K-V存储。]]></content>
+    <content type="text"><![CDATA[数据库NoSQL和SQLSQL（Structured Query Language）数据库，是指关系型数据库 NoSQL（Not Only SQL）数据库，是指非关系型数据库，不同于传统的关系型数据库，NoSQL不使用SQL作为查询语言，数据存储格式也不再需要固定的表格模式，比如使用K-V存储。 SMR盘SMR盘（Shingled Magnetic Recording，叠瓦式磁记录）是一种磁存储技术（magnetic storage），采用了磁道与磁道间像瓦片一样合理重叠的工艺设计，以此来减少每个磁道所占用的空间，提高单个盘片所能容纳的磁道数量以及整个磁盘的存储容量。 从表中数据，可以看出，SMR磁盘的磁盘密度比传统的磁盘的磁盘密度提高了很多，并且售价低廉。]]></content>
       <tags>
         <tag>数据库</tag>
       </tags>
