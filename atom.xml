@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yumz-p.xyz/"/>
-  <updated>2019-07-21T09:36:21.120Z</updated>
+  <updated>2019-07-21T09:37:33.693Z</updated>
   <id>http://yumz-p.xyz/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yumz-p.xyz/2019/07/21/dCompaction%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     <id>http://yumz-p.xyz/2019/07/21/dCompaction论文阅读/</id>
     <published>2019-07-21T09:27:11.000Z</published>
-    <updated>2019-07-21T09:36:21.120Z</updated>
+    <updated>2019-07-21T09:37:33.693Z</updated>
     
     <summary type="html">
     
@@ -35,6 +35,8 @@
     
     </summary>
     
+    
+      <category term="数据库" scheme="http://yumz-p.xyz/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
   </entry>
   
