@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yumz-p.xyz/"/>
-  <updated>2019-07-21T09:37:33.693Z</updated>
+  <updated>2019-07-21T09:48:41.343Z</updated>
   <id>http://yumz-p.xyz/</id>
   
   <author>
@@ -21,17 +21,24 @@
     <link href="http://yumz-p.xyz/2019/07/21/dCompaction%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
     <id>http://yumz-p.xyz/2019/07/21/dCompaction论文阅读/</id>
     <published>2019-07-21T09:27:11.000Z</published>
-    <updated>2019-07-21T09:37:33.693Z</updated>
+    <updated>2019-07-21T09:48:41.343Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          
-        
-      
+      &lt;h1 id=&quot;背景知识&quot;&gt;&lt;a href=&quot;#背景知识&quot; class=&quot;headerlink&quot; title=&quot;背景知识&quot;&gt;&lt;/a&gt;背景知识&lt;/h1&gt;&lt;h2 id=&quot;Bloom-Filter&quot;&gt;&lt;a href=&quot;#Bloom-Filter&quot; class=&quot;headerlink&quot; title=&quot;Bloom Filter&quot;&gt;&lt;/a&gt;Bloom Filter&lt;/h2&gt;&lt;h3 id=&quot;定义&quot;&gt;&lt;a href=&quot;#定义&quot; class=&quot;headerlink&quot; title=&quot;定义&quot;&gt;&lt;/a&gt;定义&lt;/h3&gt;&lt;p&gt;Bloom Filter是一种空间效率很高的随机数据结构，它利用位数组很简洁地表示一个集合，并能判断一个元素是否属于这个集合。Bloom Filter的这种高效是有一定代价的：在判断一个元素是否属于某个集合时，有可能会把不属于这个集合的元素误认为属于这个集合（false positive）。因此，Bloom Filter不适合那些“零错误”的应用场合。而在能容忍低错误率的应用场合下，Bloom Filter通过极少的错误换取了存储空间的极大节省。&lt;/p&gt;
+&lt;h3 id=&quot;基本思想&quot;&gt;&lt;a href=&quot;#基本思想&quot; class=&quot;headerlink&quot; title=&quot;基本思想&quot;&gt;&lt;/a&gt;基本思想&lt;/h3&gt;&lt;p&gt;它的原理是，当一个元素被加入集合时，通过K个Hash函数将这个元素映射成一个位阵列（Bit array）中的K个点，把它们置为1。检索时，我们只要看看这些点是不是都是1就（大约）知道集合中有没有它了：如果这些点有任何一个0，则被检索元素一定不在；如果都是1，则被检索元素很可能在。这就是布隆过滤器的基本思想。&lt;/p&gt;
+&lt;h2 id=&quot;LSM-tree-Compaction过程&quot;&gt;&lt;a href=&quot;#LSM-tree-Compaction过程&quot; class=&quot;headerlink&quot; title=&quot;LSM-tree Compaction过程&quot;&gt;&lt;/a&gt;LSM-tree Compaction过程&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://lrita.github.io/2018/10/22/lsm-space-amplification/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;LSM-tree 存储结构的空间放大&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://segmentfault.com/a/1190000017031501&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;LSM compaction 流程&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;要注意的是：level0-&amp;gt;level1的过程中，进行的是minor compaction，这个过程不会进行删除操作，而是直接把在mem中的immutable memtable直接传送到disk中。这是因为，这里只知道要删掉key记录，但是这个KV数据在哪里？需要进行复杂的查找，造成大量的I/O开销。&lt;/p&gt;
+&lt;p&gt;另外还有一点，lsm tree进行major compaction的过程中，对多个文件采用多路归并排序的方式，依次找出其中最小的Key记录，也就是对多个文件中的所有记录重新进行排序。之后采取一定的标准判断（对于某个key来说，如果在小于L层中存在这个Key，那么这个KV在major compaction过程中可以抛掉，这是因为越上层的key值是越新鲜的）这个Key是否还需要保存，如果判断没有保存价值，那么直接抛掉，如果觉得还需要继续保存，那么就将其写入（L+1）层中新生成的一个SSTable文件中。就这样对KV数据一一处理，形成了一系列新的L+1层数据文件，&lt;strong&gt;之前的L层文件和L+1层参与compaction 的文件数据此时已经没有意义了，所以全部删除。&lt;/strong&gt;这样就完成了L层和L+1层文件记录的合并过程。&lt;/p&gt;
+&lt;h3 id=&quot;写放大问题&quot;&gt;&lt;a href=&quot;#写放大问题&quot; class=&quot;headerlink&quot; title=&quot;写放大问题&quot;&gt;&lt;/a&gt;写放大问题&lt;/h3&gt;&lt;p&gt;文中提到：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;我们在RocksDB上进行实验，通过使用从具有256B值大小，随机密钥，Zipfian分布的YCSB生成的100％写入工作量来测量基于LSM树的KV存储的写入放大。 我们分别执行数据大小为4,6,8,10和12 GB的运行阶段。 从图a中我们可以看到，当输入数据大小为4 GB（压缩后实际为2.96 GB）时，实际磁盘写入I/ O为63.39 GB。 在这种情况下，写入放大率为15.85。 从图b中我们可以看到WAR增加到30.30，平均为19.86。 另外，随着数据大小的增加，写入放大变得更加严重。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/2019/07/21/dCompaction论文阅读/写放大.png&quot; alt=&quot;写放大&quot;&gt;&lt;/p&gt;
+&lt;p&gt;而从下图中，我们可以看到（横轴坐标代表运行数据中Get数据的占比）：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/2019/07/21/dCompaction论文阅读/I/O比例.png&quot; alt=&quot;I:O比例&quot;&gt;&lt;/p&gt;
+&lt;p&gt;write-ahead log I/O的比例总是小于2％，并且get I/O的比例正在增加，但即使get比例增加到90％也不会超过20％。 Compaction I/O的比例始终大于80％。 因此，我们可以得出结论，严重的写入放大会大大消耗大部分磁盘I/O带宽，并且几乎不需要为前端应用程序请求提供服务（如前端应用程序需要调用get操作）。&lt;/p&gt;
+&lt;/blockquote&gt;
     
     </summary>
     

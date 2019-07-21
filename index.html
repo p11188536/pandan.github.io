@@ -7,7 +7,7 @@
 
 <html class="theme-next muse use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -193,7 +193,7 @@
 
 
 
-  <title>YuMZ's Blog</title>
+  <title>YuMZ's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -212,7 +212,7 @@
     
   
 
-  <div class="container sidebar-position-left 
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
   page-home">
     <div class="headband"></div>
 
@@ -426,7 +426,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  2.9k
+                  2.8k
                 </span>
               
 
@@ -452,8 +452,7 @@
 
       
         
-          
-            <h1 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h1><h2 id="Bloom-Filter"><a href="#Bloom-Filter" class="headerlink" title="Bloom Filter"></a>Bloom Filter</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>Bloom Filter是一种空间效率很高的随机数据结构，它利用位数组很简洁地表示一个集合，并能判断一个元素是否属于这个集合。Bloom Filter的这种高效是有一定代价的：在判断一个元素是否属于某个集合时，有可能会把不属于这个集合的元素误认为属于这个集合（false positive）。因此，Bloom Filter不适合那些“零错误”的应用场合。而在能容忍低错误率的应用场合下，Bloom Filter通过极少的错误换取了存储空间的极大节省。</p>
+          <h1 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h1><h2 id="Bloom-Filter"><a href="#Bloom-Filter" class="headerlink" title="Bloom Filter"></a>Bloom Filter</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>Bloom Filter是一种空间效率很高的随机数据结构，它利用位数组很简洁地表示一个集合，并能判断一个元素是否属于这个集合。Bloom Filter的这种高效是有一定代价的：在判断一个元素是否属于某个集合时，有可能会把不属于这个集合的元素误认为属于这个集合（false positive）。因此，Bloom Filter不适合那些“零错误”的应用场合。而在能容忍低错误率的应用场合下，Bloom Filter通过极少的错误换取了存储空间的极大节省。</p>
 <h3 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h3><p>它的原理是，当一个元素被加入集合时，通过K个Hash函数将这个元素映射成一个位阵列（Bit array）中的K个点，把它们置为1。检索时，我们只要看看这些点是不是都是1就（大约）知道集合中有没有它了：如果这些点有任何一个0，则被检索元素一定不在；如果都是1，则被检索元素很可能在。这就是布隆过滤器的基本思想。</p>
 <h2 id="LSM-tree-Compaction过程"><a href="#LSM-tree-Compaction过程" class="headerlink" title="LSM-tree Compaction过程"></a>LSM-tree Compaction过程</h2><p><a href="https://lrita.github.io/2018/10/22/lsm-space-amplification/" target="_blank" rel="noopener">LSM-tree 存储结构的空间放大</a></p>
 <p><a href="https://segmentfault.com/a/1190000017031501" target="_blank" rel="noopener">LSM compaction 流程</a></p>
@@ -467,139 +466,13 @@
 <p><img src="/2019/07/21/dCompaction论文阅读/I/O比例.png" alt="I:O比例"></p>
 <p>write-ahead log I/O的比例总是小于2％，并且get I/O的比例正在增加，但即使get比例增加到90％也不会超过20％。 Compaction I/O的比例始终大于80％。 因此，我们可以得出结论，严重的写入放大会大大消耗大部分磁盘I/O带宽，并且几乎不需要为前端应用程序请求提供服务（如前端应用程序需要调用get操作）。</p>
 </blockquote>
-<h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><table>
-<thead>
-<tr>
-<th>词语</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>M或AF</td>
-<td>Amplification Factor，放大因子。AF(或M)=$$\frac{Size(C_i+1)}{Size(C_i)}$$。</td>
-</tr>
-<tr>
-<td>WAR</td>
-<td>Write Amplification Ratio，写放大率，即$$\frac{真实写入磁盘的数值}{用户写入的数值}$$（the proportion between actual write amount to the disk and the amount of data written by users）。</td>
-</tr>
-<tr>
-<td>Log I/Os</td>
-<td>the write-ahead log I/Os for ensuring the reliability of KV items，即写WAL时的I/O消耗。</td>
-</tr>
-<tr>
-<td>Get I/Os</td>
-<td>issued to get the specific KV items from disk-resident SSTables.</td>
-</tr>
-<tr>
-<td>Compaction I/Os</td>
-<td>include reading KV items from disk-resident SSTables and writing KV items that were sorted and merged to SSTables.</td>
-</tr>
-<tr>
-<td>VCT</td>
-<td>（写过程）Virtual Compaction Threshold，在进行real compaction触发之前，能够进行virtual compaction的real SSTable的数量的阈值（大于这个值，触发real compaction否则进行virtual compaction）。</td>
-</tr>
-<tr>
-<td>VSMT</td>
-<td>（读过程）Virtual SSTable Merge Threshold,表示虚拟SSTable派生的真实SSTable的数量。</td>
-</tr>
-</tbody>
-</table>
-<h1 id="研究动机"><a href="#研究动机" class="headerlink" title="研究动机"></a>研究动机</h1><p><img src="/2019/07/21/dCompaction论文阅读/motivation1.png" alt="研究动机"></p>
-<p><img src="/2019/07/21/dCompaction论文阅读/motivation2.png" alt="研究动机"></p>
-<p>研究动机如上图，得出的结论是：</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>​    在没有KV对在compaction发生后被删除的前提下：</p>
-<p>（1）$$T_{34}，T_{35}，T_{36}$$中的KV对可以在$$T_{22}，T_{32}，T_{33}$$中找到，同理，$$T_{45}，T_{46}，T_{47}，T_{48}$$中的KV对可以在$$T_{34}，T_{34}，T_{36}，T_{42}，T_{43}$$中找到。</p>
-<p>（2）这个过程中存在着重复的写和读，以$$T_{22}，T_{32}，T_{33}$$为例，其中的KV对至少被读取和写入两次。</p>
-<p>有一个点要注意：</p>
-<p>为什么$$W(T_{34}+T_{35}+T_{36})=R(T_{22}+T_{32}+T_{33})$$？</p>
-<p>这主要是因为在前面</p>
-<blockquote>
-<p>no KV items are deleted</p>
-</blockquote>
-<p>的假设，再看到后面介绍到的W和R分别代表着：</p>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>W</td>
-<td><strong>compaction发生过程中</strong>writeI/O的总大小</td>
-</tr>
-<tr>
-<td>R</td>
-<td><strong>compaction发生过程中</strong>readI/O的总大小</td>
-</tr>
-</tbody>
-</table>
-<p>也就是说，上面两个等式实际上说的就是<strong>compaction的过程</strong>，这个过程在compaction之前把数据read进入mem，在compaction之后又把产生的结果压缩回disk，如果no KV items are deleted，那么读出和写入的便消耗相同的I/O，这一点实际上就不言而喻了。</p>
-<p><del>没有一个kv对在新产生的sstable中被删除，又由于发生了major compaction，major compaction之后参与compaction的所有数据都被删除，而这里有所有参加了compaction过程的数据都只有一份，所以相当于将$$T_{22}+T_{32}+T_{33}$$直接转移到了$$T_{34}+T_{35}+T_{36}$$。</del></p>
-<h1 id="Design-of-Compaction"><a href="#Design-of-Compaction" class="headerlink" title="Design of Compaction"></a>Design of Compaction</h1><h2 id="主要思想"><a href="#主要思想" class="headerlink" title="主要思想"></a>主要思想</h2><h3 id="Real-Compaction"><a href="#Real-Compaction" class="headerlink" title="Real Compaction"></a>Real Compaction</h3><table>
-<thead>
-<tr>
-<th>名词</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>real compaction</td>
-<td>如Figure 3(a)所示，我们它为real compaciton，即所选择的SSTable合并为新的并且无重叠的SSTable。</td>
-</tr>
-<tr>
-<td>real SSTable</td>
-<td>如下图，我们定义由real compaction生成的SSTable为real SSTable。</td>
-</tr>
-<tr>
-<td>Metadata</td>
-<td>对每一个real SSTable，都有一个对应的SSTable metadata，用来存储在这个SSTable中最大key，最小key，file number和file size，即下面(a)图所示。</td>
-</tr>
-<tr>
-<td>metadata generation</td>
-<td>metadata的生成阶段称为metadata generation</td>
-</tr>
-</tbody>
-</table>
-<p><img src="/2019/07/21/dCompaction论文阅读/real_compaction.png" alt="real_compaction"></p>
-<p>因此，real compaction可以分为两个阶段，分别为data generation（数据生成阶段）和meta generation。 大多数I / O开销是由data generation引起的，而metadata generation则具有较少的I / O开销。</p>
-<h3 id="Virtual-Compaction"><a href="#Virtual-Compaction" class="headerlink" title="Virtual Compaction"></a>Virtual Compaction</h3><p>在Virtual Compaction的过程中，没有进行data generation的过程，<strong>只进行metadata generation</strong>，因此，Virtual Compaction与Real Compaction相比，节省了Compaction可能消耗的I/O。</p>
-<p><img src="/2019/07/21/dCompaction论文阅读/virtual_compaction.png" alt="real_compaction"></p>
-<p>从上图中可以看出，</p>
-<p>（1）在virtual compaction之后形成的virtual SSTable中，Meatadata除了保存Smallest Key，Largest Key，File Number和File size之外，还需要保存ParentSSTables。</p>
-<p>（2）ParentSSTables存储的是Real SSTable，即形成了Virtual SSTable和Real SSTable的对应关系。</p>
-<h3 id="dCompaction的基本思想"><a href="#dCompaction的基本思想" class="headerlink" title="dCompaction的基本思想"></a>dCompaction的基本思想</h3><p><img src="/2019/07/21/dCompaction论文阅读/基本的dcompaction过程.png" alt="基本的dcompaction过程"></p>
-<p>通过Virtual Compaction将$$T_{22}，T_{32}和T_{33}$$转换为$$VT_{34}，VT_{35}和VT_{36}$$，并且仅在$$VT_{34}，VT_{35}和VT_{36}$$记录metadata，所以就可以避免因real compaction而导致的compaction I/O消耗。在之后的real compaction中，将$$T_{42}，T_{43}$$与$$VT_{34}，VT_{35}和VT_{36}$$的parentSSTable即$$T_{22}，T_{32}和T_{33}$$合并，得到$$T_{44}，T_{45}，T_{46}，T_{47}和T_{48}$$。</p>
-<p>优点：</p>
-<p>（1）与传统的compaction 策略相比，<strong>$$T_{22}，T_{32}和T_{33}$$在dCompaction中只读写一次，因此可以减少重复的I/O开销，写放大也会被极大降低</strong>。</p>
-<p>（2）通过计算，当AF=10时，$$C_{2}-&gt;C_{4}$$这个过程省下的带宽为8.3%。</p>
-<p>缺点：</p>
-<p><strong>虽然virtual compaction对写性能有很大的提升，但在读性能方面的影响更大，下面将讨论virtual compaction对读性能的影响。</strong></p>
-<h2 id="读过程"><a href="#读过程" class="headerlink" title="读过程"></a>读过程</h2><h3 id="real-SSTable中的读操作"><a href="#real-SSTable中的读操作" class="headerlink" title="real SSTable中的读操作"></a>real SSTable中的读操作</h3><p><img src="/2019/07/21/dCompaction论文阅读/real_read.png" alt="real_read"></p>
-<h3 id="virtual-SSTable中的读操作"><a href="#virtual-SSTable中的读操作" class="headerlink" title="virtual SSTable中的读操作"></a>virtual SSTable中的读操作</h3><p><img src="/2019/07/21/dCompaction论文阅读/virtual_read.png" alt="virtual_read"></p>
-<p>与在real SSTable中的读操作相同，在Virtual SSTable中进行读操作：</p>
-<p>首先，同样需要判断要查找的kv对的key值是否在该SSTable的key值范围内（介于smallest key和largest key之间）。假设在这个virtual SSTable中，那么就进行下一步。</p>
-<p>然后就与real SSTable中操作不同了，读取parentSSTables，并<strong>依次</strong>在parentSSTables中搜索kv对（依次体现在图中）。</p>
-<h3 id="结论-1"><a href="#结论-1" class="headerlink" title="结论"></a>结论</h3><p>通过对virtual SSTable的读取过程的分析，我们可以观察到，在许多real SSTable中搜索目标KV对时，<strong>读取的路径长度变大了，因此virtual SSTable中涉及到的real SSTable的数量是非常重要的</strong>。 换句话说，<strong>更频繁的virtual compaction意味着更高的写入性能但更低的读取性能</strong>。 相反，<strong>更频繁的real compaction意味着更低的写入性能，但更高的读取性能</strong>。 总之，触发real compaction或virtual compaction的条件对于写入和读取性能至关重要。</p>
-<h2 id="VCT和VSMT"><a href="#VCT和VSMT" class="headerlink" title="VCT和VSMT"></a>VCT和VSMT</h2><p>VCT和VSMT对应了<strong>写和读</strong>过程中的两个阈值：</p>
-<h3 id="VCT-触发条件"><a href="#VCT-触发条件" class="headerlink" title="VCT 触发条件"></a>VCT 触发条件</h3><p>Virtual Compaction Threshold，在进行real compaction触发之前，能够进行virtual compaction的real SSTable的数量的阈值（大于这个值，触发real compaction否则进行virtual compaction）。当大于这个阈值时，就发生real compaction。首先，我们计算real SSTable的数量，然后将其与VCT进行比较，以确定virtual compaction或real compaction（比如VCT为5，如果real SSTables的数量为6，那么就进行real compaction）。</p>
-<h4 id="如何设置VCT的值"><a href="#如何设置VCT的值" class="headerlink" title="如何设置VCT的值"></a>如何设置VCT的值</h4><p>（1）如果VCT的值设置的比较大，将会延长随后的real compaction的时间（因为总量上涨了），这将会导致写入吞吐量激增。因此就需要考虑：compaction过程中的总数据量以及随后发生real compaction时需要消耗的时间。</p>
-<p>（2）如上文中所说的，如果增大VCT，那么就会导致virtual SSTables含有更多的real SSTables，增加了read latency。因此，从读取性能的角度来看，VCT应该限制在一定范围内。</p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>通过后面的实验，考虑write amplification，real compaction time和read performance在内的多种因素。认为VCT应设置在8-16之间。</p>
-<h3 id="VSMT的触发条件"><a href="#VSMT的触发条件" class="headerlink" title="VSMT的触发条件"></a>VSMT的触发条件</h3><p>Virtual SSTable Merge Threshold,表示虚拟SSTable派生的真实SSTable的数量。在读取过程中，如果读取操作读取的是virtual SSTable并且其real SSTable的数量大于VSMT，则我们触发虚拟SSTable merge（不是compaction，因为不是在lsm多层结构下的）。</p>
-<p><img src="/2019/07/21/dCompaction论文阅读/VSMT.png" alt="VSMT"></p>
-<p>以上图为例，表示了VSMT触发后，进行merge的过程：</p>
-<p>不仅仅是$$VT_{34}$$将被转化为real SSTable，与之相邻的virtual SSTable也将被转化。</p>
-<p>这是因为在进行merge的过程中，生成了$$T_{34},T_{35},T_{36}$$，所以与$$VT_{34}$$相邻的$$VT_{35},VT_{36}$$会被merge进入$$T_{35},T_{36}$$中（$$T_{32},T_{33}$$中有一部分在merge中进入了$$T_{35},T_{36}$$,而$$VT_{35},VT_{36}$$代表的也是$$T_{32},T_{33}$$，不需要重复两者，这样只会消耗更多的带宽，所以过程中相邻的Virtual SSTable也会被转化）。</p>
-<h4 id="影响"><a href="#影响" class="headerlink" title="影响"></a>影响</h4><p>VSMT过大：对read性能的改善不明显。</p>
-<p>VSMT过小：对经常性地进行merge，增加了消耗，降低了dCompaction本应该发挥的积极影响。</p>
-<p>后续实验测的，3-6是一个合适的范围。</p>
-<p><a href="http://39.105.50.126/dcompaction/" target="_blank" rel="noopener">^_^</a></p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/07/21/dCompaction论文阅读/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1727,7 +1600,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">6.9k</span>
+    <span title="Site words total count">6.8k</span>
   
 </div>
 
@@ -2288,6 +2161,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
 
   
 

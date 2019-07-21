@@ -7,7 +7,7 @@
 
 <html class="theme-next muse use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -166,7 +166,7 @@
 <meta property="og:image" content="http://yumz-p.xyz/2019/07/21/dCompaction论文阅读/real_read.png">
 <meta property="og:image" content="http://yumz-p.xyz/2019/07/21/dCompaction论文阅读/virtual_read.png">
 <meta property="og:image" content="http://yumz-p.xyz/2019/07/21/dCompaction论文阅读/VSMT.png">
-<meta property="og:updated_time" content="2019-07-21T09:37:33.693Z">
+<meta property="og:updated_time" content="2019-07-21T09:48:41.343Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="dCompaction论文阅读">
 <meta name="twitter:description" content="背景知识Bloom Filter定义Bloom Filter是一种空间效率很高的随机数据结构，它利用位数组很简洁地表示一个集合，并能判断一个元素是否属于这个集合。Bloom Filter的这种高效是有一定代价的：在判断一个元素是否属于某个集合时，有可能会把不属于这个集合的元素误认为属于这个集合（false positive）。因此，Bloom Filter不适合那些“零错误”的应用场合。而在能容忍">
@@ -206,7 +206,7 @@
 
 
 
-  <title>dCompaction论文阅读 | YuMZ's Blog</title>
+  <title>dCompaction论文阅读 | YuMZ's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -225,7 +225,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -441,7 +441,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  2.9k
+                  2.8k
                 </span>
               
 
@@ -480,6 +480,7 @@
 <p><img src="/2019/07/21/dCompaction论文阅读/I/O比例.png" alt="I:O比例"></p>
 <p>write-ahead log I/O的比例总是小于2％，并且get I/O的比例正在增加，但即使get比例增加到90％也不会超过20％。 Compaction I/O的比例始终大于80％。 因此，我们可以得出结论，严重的写入放大会大大消耗大部分磁盘I/O带宽，并且几乎不需要为前端应用程序请求提供服务（如前端应用程序需要调用get操作）。</p>
 </blockquote>
+<a id="more"></a>
 <h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><table>
 <thead>
 <tr>
@@ -490,11 +491,11 @@
 <tbody>
 <tr>
 <td>M或AF</td>
-<td>Amplification Factor，放大因子。AF(或M)=$$\frac{Size(C_i+1)}{Size(C_i)}$$。</td>
+<td>Amplification Factor，放大因子。AF(或M)=$\frac{Size(C_i+1)}{Size(C_i)}$。</td>
 </tr>
 <tr>
 <td>WAR</td>
-<td>Write Amplification Ratio，写放大率，即$$\frac{真实写入磁盘的数值}{用户写入的数值}$$（the proportion between actual write amount to the disk and the amount of data written by users）。</td>
+<td>Write Amplification Ratio，写放大率，即$\frac{真实写入磁盘的数值}{用户写入的数值}$（the proportion between actual write amount to the disk and the amount of data written by users）。</td>
 </tr>
 <tr>
 <td>Log I/Os</td>
@@ -522,10 +523,10 @@
 <p><img src="/2019/07/21/dCompaction论文阅读/motivation2.png" alt="研究动机"></p>
 <p>研究动机如上图，得出的结论是：</p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>​    在没有KV对在compaction发生后被删除的前提下：</p>
-<p>（1）$$T_{34}，T_{35}，T_{36}$$中的KV对可以在$$T_{22}，T_{32}，T_{33}$$中找到，同理，$$T_{45}，T_{46}，T_{47}，T_{48}$$中的KV对可以在$$T_{34}，T_{34}，T_{36}，T_{42}，T_{43}$$中找到。</p>
-<p>（2）这个过程中存在着重复的写和读，以$$T_{22}，T_{32}，T_{33}$$为例，其中的KV对至少被读取和写入两次。</p>
+<p>（1）$T_{34}，T_{35}，T_{36}$中的KV对可以在$T_{22}，T_{32}，T_{33}$中找到，同理，$T_{45}，T_{46}，T_{47}，T_{48}$中的KV对可以在$T_{34}，T_{34}，T_{36}，T_{42}，T_{43}$中找到。</p>
+<p>（2）这个过程中存在着重复的写和读，以$T_{22}，T_{32}，T_{33}$为例，其中的KV对至少被读取和写入两次。</p>
 <p>有一个点要注意：</p>
-<p>为什么$$W(T_{34}+T_{35}+T_{36})=R(T_{22}+T_{32}+T_{33})$$？</p>
+<p>为什么$W(T_{34}+T_{35}+T_{36})=R(T_{22}+T_{32}+T_{33})$？</p>
 <p>这主要是因为在前面</p>
 <blockquote>
 <p>no KV items are deleted</p>
@@ -550,7 +551,6 @@
 </tbody>
 </table>
 <p>也就是说，上面两个等式实际上说的就是<strong>compaction的过程</strong>，这个过程在compaction之前把数据read进入mem，在compaction之后又把产生的结果压缩回disk，如果no KV items are deleted，那么读出和写入的便消耗相同的I/O，这一点实际上就不言而喻了。</p>
-<p><del>没有一个kv对在新产生的sstable中被删除，又由于发生了major compaction，major compaction之后参与compaction的所有数据都被删除，而这里有所有参加了compaction过程的数据都只有一份，所以相当于将$$T_{22}+T_{32}+T_{33}$$直接转移到了$$T_{34}+T_{35}+T_{36}$$。</del></p>
 <h1 id="Design-of-Compaction"><a href="#Design-of-Compaction" class="headerlink" title="Design of Compaction"></a>Design of Compaction</h1><h2 id="主要思想"><a href="#主要思想" class="headerlink" title="主要思想"></a>主要思想</h2><h3 id="Real-Compaction"><a href="#Real-Compaction" class="headerlink" title="Real Compaction"></a>Real Compaction</h3><table>
 <thead>
 <tr>
@@ -585,10 +585,10 @@
 <p>（1）在virtual compaction之后形成的virtual SSTable中，Meatadata除了保存Smallest Key，Largest Key，File Number和File size之外，还需要保存ParentSSTables。</p>
 <p>（2）ParentSSTables存储的是Real SSTable，即形成了Virtual SSTable和Real SSTable的对应关系。</p>
 <h3 id="dCompaction的基本思想"><a href="#dCompaction的基本思想" class="headerlink" title="dCompaction的基本思想"></a>dCompaction的基本思想</h3><p><img src="/2019/07/21/dCompaction论文阅读/基本的dcompaction过程.png" alt="基本的dcompaction过程"></p>
-<p>通过Virtual Compaction将$$T_{22}，T_{32}和T_{33}$$转换为$$VT_{34}，VT_{35}和VT_{36}$$，并且仅在$$VT_{34}，VT_{35}和VT_{36}$$记录metadata，所以就可以避免因real compaction而导致的compaction I/O消耗。在之后的real compaction中，将$$T_{42}，T_{43}$$与$$VT_{34}，VT_{35}和VT_{36}$$的parentSSTable即$$T_{22}，T_{32}和T_{33}$$合并，得到$$T_{44}，T_{45}，T_{46}，T_{47}和T_{48}$$。</p>
+<p>通过Virtual Compaction将$T_{22}，T_{32}和T_{33}$转换为$VT_{34}，VT_{35}和VT_{36}$，并且仅在$VT_{34}，VT_{35}和VT_{36}$记录metadata，所以就可以避免因real compaction而导致的compaction I/O消耗。在之后的real compaction中，将$T_{42}，T_{43}$与$VT_{34}，VT_{35}和VT_{36}$的parentSSTable即$T_{22}，T_{32}和T_{33}$合并，得到$T_{44}，T_{45}，T_{46}，T_{47}和T_{48}$。</p>
 <p>优点：</p>
-<p>（1）与传统的compaction 策略相比，<strong>$$T_{22}，T_{32}和T_{33}$$在dCompaction中只读写一次，因此可以减少重复的I/O开销，写放大也会被极大降低</strong>。</p>
-<p>（2）通过计算，当AF=10时，$$C_{2}-&gt;C_{4}$$这个过程省下的带宽为8.3%。</p>
+<p>（1）与传统的compaction 策略相比，<strong>$T_{22}，T_{32}和T_{33}$在dCompaction中只读写一次，因此可以减少重复的I/O开销，写放大也会被极大降低</strong>。</p>
+<p>（2）通过计算，当AF=10时，$C_{2}-&gt;C_{4}$这个过程省下的带宽为8.3%。</p>
 <p>缺点：</p>
 <p><strong>虽然virtual compaction对写性能有很大的提升，但在读性能方面的影响更大，下面将讨论virtual compaction对读性能的影响。</strong></p>
 <h2 id="读过程"><a href="#读过程" class="headerlink" title="读过程"></a>读过程</h2><h3 id="real-SSTable中的读操作"><a href="#real-SSTable中的读操作" class="headerlink" title="real SSTable中的读操作"></a>real SSTable中的读操作</h3><p><img src="/2019/07/21/dCompaction论文阅读/real_read.png" alt="real_read"></p>
@@ -605,8 +605,8 @@
 <h3 id="VSMT的触发条件"><a href="#VSMT的触发条件" class="headerlink" title="VSMT的触发条件"></a>VSMT的触发条件</h3><p>Virtual SSTable Merge Threshold,表示虚拟SSTable派生的真实SSTable的数量。在读取过程中，如果读取操作读取的是virtual SSTable并且其real SSTable的数量大于VSMT，则我们触发虚拟SSTable merge（不是compaction，因为不是在lsm多层结构下的）。</p>
 <p><img src="/2019/07/21/dCompaction论文阅读/VSMT.png" alt="VSMT"></p>
 <p>以上图为例，表示了VSMT触发后，进行merge的过程：</p>
-<p>不仅仅是$$VT_{34}$$将被转化为real SSTable，与之相邻的virtual SSTable也将被转化。</p>
-<p>这是因为在进行merge的过程中，生成了$$T_{34},T_{35},T_{36}$$，所以与$$VT_{34}$$相邻的$$VT_{35},VT_{36}$$会被merge进入$$T_{35},T_{36}$$中（$$T_{32},T_{33}$$中有一部分在merge中进入了$$T_{35},T_{36}$$,而$$VT_{35},VT_{36}$$代表的也是$$T_{32},T_{33}$$，不需要重复两者，这样只会消耗更多的带宽，所以过程中相邻的Virtual SSTable也会被转化）。</p>
+<p>不仅仅是$VT_{34}$将被转化为real SSTable，与之相邻的virtual SSTable也将被转化。</p>
+<p>这是因为在进行merge的过程中，生成了$T_{34},T_{35},T_{36}$，所以与$VT_{34}$相邻的$VT_{35},VT_{36}$会被merge进入$T_{35},T_{36}$中（$T_{32},T_{33}$中有一部分在merge中进入了$T_{35},T_{36}$,而$VT_{35},VT_{36}$代表的也是$T_{32},T_{33}$，不需要重复两者，这样只会消耗更多的带宽，所以过程中相邻的Virtual SSTable也会被转化）。</p>
 <h4 id="影响"><a href="#影响" class="headerlink" title="影响"></a>影响</h4><p>VSMT过大：对read性能的改善不明显。</p>
 <p>VSMT过小：对经常性地进行merge，增加了消耗，降低了dCompaction本应该发挥的积极影响。</p>
 <p>后续实验测的，3-6是一个合适的范围。</p>
@@ -863,7 +863,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">6.9k</span>
+    <span title="Site words total count">6.8k</span>
   
 </div>
 
@@ -1428,6 +1428,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
 
   
 
