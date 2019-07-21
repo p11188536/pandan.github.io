@@ -353,6 +353,299 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yumz-p.xyz/2019/07/21/dCompaction论文阅读/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YuMZ">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YuMZ's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/21/dCompaction论文阅读/" itemprop="url">dCompaction论文阅读</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-21T17:27:11+08:00">
+                2019-07-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/21/dCompaction论文阅读/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/21/dCompaction论文阅读/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.9k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h1><h2 id="Bloom-Filter"><a href="#Bloom-Filter" class="headerlink" title="Bloom Filter"></a>Bloom Filter</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>Bloom Filter是一种空间效率很高的随机数据结构，它利用位数组很简洁地表示一个集合，并能判断一个元素是否属于这个集合。Bloom Filter的这种高效是有一定代价的：在判断一个元素是否属于某个集合时，有可能会把不属于这个集合的元素误认为属于这个集合（false positive）。因此，Bloom Filter不适合那些“零错误”的应用场合。而在能容忍低错误率的应用场合下，Bloom Filter通过极少的错误换取了存储空间的极大节省。</p>
+<h3 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h3><p>它的原理是，当一个元素被加入集合时，通过K个Hash函数将这个元素映射成一个位阵列（Bit array）中的K个点，把它们置为1。检索时，我们只要看看这些点是不是都是1就（大约）知道集合中有没有它了：如果这些点有任何一个0，则被检索元素一定不在；如果都是1，则被检索元素很可能在。这就是布隆过滤器的基本思想。</p>
+<h2 id="LSM-tree-Compaction过程"><a href="#LSM-tree-Compaction过程" class="headerlink" title="LSM-tree Compaction过程"></a>LSM-tree Compaction过程</h2><p><a href="https://lrita.github.io/2018/10/22/lsm-space-amplification/" target="_blank" rel="noopener">LSM-tree 存储结构的空间放大</a></p>
+<p><a href="https://segmentfault.com/a/1190000017031501" target="_blank" rel="noopener">LSM compaction 流程</a></p>
+<p>要注意的是：level0-&gt;level1的过程中，进行的是minor compaction，这个过程不会进行删除操作，而是直接把在mem中的immutable memtable直接传送到disk中。这是因为，这里只知道要删掉key记录，但是这个KV数据在哪里？需要进行复杂的查找，造成大量的I/O开销。</p>
+<p>另外还有一点，lsm tree进行major compaction的过程中，对多个文件采用多路归并排序的方式，依次找出其中最小的Key记录，也就是对多个文件中的所有记录重新进行排序。之后采取一定的标准判断（对于某个key来说，如果在小于L层中存在这个Key，那么这个KV在major compaction过程中可以抛掉，这是因为越上层的key值是越新鲜的）这个Key是否还需要保存，如果判断没有保存价值，那么直接抛掉，如果觉得还需要继续保存，那么就将其写入（L+1）层中新生成的一个SSTable文件中。就这样对KV数据一一处理，形成了一系列新的L+1层数据文件，<strong>之前的L层文件和L+1层参与compaction 的文件数据此时已经没有意义了，所以全部删除。</strong>这样就完成了L层和L+1层文件记录的合并过程。</p>
+<h3 id="写放大问题"><a href="#写放大问题" class="headerlink" title="写放大问题"></a>写放大问题</h3><p>文中提到：</p>
+<blockquote>
+<p>我们在RocksDB上进行实验，通过使用从具有256B值大小，随机密钥，Zipfian分布的YCSB生成的100％写入工作量来测量基于LSM树的KV存储的写入放大。 我们分别执行数据大小为4,6,8,10和12 GB的运行阶段。 从图a中我们可以看到，当输入数据大小为4 GB（压缩后实际为2.96 GB）时，实际磁盘写入I/ O为63.39 GB。 在这种情况下，写入放大率为15.85。 从图b中我们可以看到WAR增加到30.30，平均为19.86。 另外，随着数据大小的增加，写入放大变得更加严重。</p>
+<p><img src="/2019/07/21/dCompaction论文阅读/写放大.png" alt="写放大"></p>
+<p>而从下图中，我们可以看到（横轴坐标代表运行数据中Get数据的占比）：</p>
+<p><img src="/2019/07/21/dCompaction论文阅读/I/O比例.png" alt="I:O比例"></p>
+<p>write-ahead log I/O的比例总是小于2％，并且get I/O的比例正在增加，但即使get比例增加到90％也不会超过20％。 Compaction I/O的比例始终大于80％。 因此，我们可以得出结论，严重的写入放大会大大消耗大部分磁盘I/O带宽，并且几乎不需要为前端应用程序请求提供服务（如前端应用程序需要调用get操作）。</p>
+</blockquote>
+<h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><table>
+<thead>
+<tr>
+<th>词语</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M或AF</td>
+<td>Amplification Factor，放大因子。AF(或M)=$$\frac{Size(C_i+1)}{Size(C_i)}$$。</td>
+</tr>
+<tr>
+<td>WAR</td>
+<td>Write Amplification Ratio，写放大率，即$$\frac{真实写入磁盘的数值}{用户写入的数值}$$（the proportion between actual write amount to the disk and the amount of data written by users）。</td>
+</tr>
+<tr>
+<td>Log I/Os</td>
+<td>the write-ahead log I/Os for ensuring the reliability of KV items，即写WAL时的I/O消耗。</td>
+</tr>
+<tr>
+<td>Get I/Os</td>
+<td>issued to get the specific KV items from disk-resident SSTables.</td>
+</tr>
+<tr>
+<td>Compaction I/Os</td>
+<td>include reading KV items from disk-resident SSTables and writing KV items that were sorted and merged to SSTables.</td>
+</tr>
+<tr>
+<td>VCT</td>
+<td>（写过程）Virtual Compaction Threshold，在进行real compaction触发之前，能够进行virtual compaction的real SSTable的数量的阈值（大于这个值，触发real compaction否则进行virtual compaction）。</td>
+</tr>
+<tr>
+<td>VSMT</td>
+<td>（读过程）Virtual SSTable Merge Threshold,表示虚拟SSTable派生的真实SSTable的数量。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="研究动机"><a href="#研究动机" class="headerlink" title="研究动机"></a>研究动机</h1><p><img src="/2019/07/21/dCompaction论文阅读/motivation1.png" alt="研究动机"></p>
+<p><img src="/2019/07/21/dCompaction论文阅读/motivation2.png" alt="研究动机"></p>
+<p>研究动机如上图，得出的结论是：</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>​    在没有KV对在compaction发生后被删除的前提下：</p>
+<p>（1）$$T_{34}，T_{35}，T_{36}$$中的KV对可以在$$T_{22}，T_{32}，T_{33}$$中找到，同理，$$T_{45}，T_{46}，T_{47}，T_{48}$$中的KV对可以在$$T_{34}，T_{34}，T_{36}，T_{42}，T_{43}$$中找到。</p>
+<p>（2）这个过程中存在着重复的写和读，以$$T_{22}，T_{32}，T_{33}$$为例，其中的KV对至少被读取和写入两次。</p>
+<p>有一个点要注意：</p>
+<p>为什么$$W(T_{34}+T_{35}+T_{36})=R(T_{22}+T_{32}+T_{33})$$？</p>
+<p>这主要是因为在前面</p>
+<blockquote>
+<p>no KV items are deleted</p>
+</blockquote>
+<p>的假设，再看到后面介绍到的W和R分别代表着：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>W</td>
+<td><strong>compaction发生过程中</strong>writeI/O的总大小</td>
+</tr>
+<tr>
+<td>R</td>
+<td><strong>compaction发生过程中</strong>readI/O的总大小</td>
+</tr>
+</tbody>
+</table>
+<p>也就是说，上面两个等式实际上说的就是<strong>compaction的过程</strong>，这个过程在compaction之前把数据read进入mem，在compaction之后又把产生的结果压缩回disk，如果no KV items are deleted，那么读出和写入的便消耗相同的I/O，这一点实际上就不言而喻了。</p>
+<p><del>没有一个kv对在新产生的sstable中被删除，又由于发生了major compaction，major compaction之后参与compaction的所有数据都被删除，而这里有所有参加了compaction过程的数据都只有一份，所以相当于将$$T_{22}+T_{32}+T_{33}$$直接转移到了$$T_{34}+T_{35}+T_{36}$$。</del></p>
+<h1 id="Design-of-Compaction"><a href="#Design-of-Compaction" class="headerlink" title="Design of Compaction"></a>Design of Compaction</h1><h2 id="主要思想"><a href="#主要思想" class="headerlink" title="主要思想"></a>主要思想</h2><h3 id="Real-Compaction"><a href="#Real-Compaction" class="headerlink" title="Real Compaction"></a>Real Compaction</h3><table>
+<thead>
+<tr>
+<th>名词</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>real compaction</td>
+<td>如Figure 3(a)所示，我们它为real compaciton，即所选择的SSTable合并为新的并且无重叠的SSTable。</td>
+</tr>
+<tr>
+<td>real SSTable</td>
+<td>如下图，我们定义由real compaction生成的SSTable为real SSTable。</td>
+</tr>
+<tr>
+<td>Metadata</td>
+<td>对每一个real SSTable，都有一个对应的SSTable metadata，用来存储在这个SSTable中最大key，最小key，file number和file size，即下面(a)图所示。</td>
+</tr>
+<tr>
+<td>metadata generation</td>
+<td>metadata的生成阶段称为metadata generation</td>
+</tr>
+</tbody>
+</table>
+<p><img src="/2019/07/21/dCompaction论文阅读/real_compaction.png" alt="real_compaction"></p>
+<p>因此，real compaction可以分为两个阶段，分别为data generation（数据生成阶段）和meta generation。 大多数I / O开销是由data generation引起的，而metadata generation则具有较少的I / O开销。</p>
+<h3 id="Virtual-Compaction"><a href="#Virtual-Compaction" class="headerlink" title="Virtual Compaction"></a>Virtual Compaction</h3><p>在Virtual Compaction的过程中，没有进行data generation的过程，<strong>只进行metadata generation</strong>，因此，Virtual Compaction与Real Compaction相比，节省了Compaction可能消耗的I/O。</p>
+<p><img src="/2019/07/21/dCompaction论文阅读/virtual_compaction.png" alt="real_compaction"></p>
+<p>从上图中可以看出，</p>
+<p>（1）在virtual compaction之后形成的virtual SSTable中，Meatadata除了保存Smallest Key，Largest Key，File Number和File size之外，还需要保存ParentSSTables。</p>
+<p>（2）ParentSSTables存储的是Real SSTable，即形成了Virtual SSTable和Real SSTable的对应关系。</p>
+<h3 id="dCompaction的基本思想"><a href="#dCompaction的基本思想" class="headerlink" title="dCompaction的基本思想"></a>dCompaction的基本思想</h3><p><img src="/2019/07/21/dCompaction论文阅读/基本的dcompaction过程.png" alt="基本的dcompaction过程"></p>
+<p>通过Virtual Compaction将$$T_{22}，T_{32}和T_{33}$$转换为$$VT_{34}，VT_{35}和VT_{36}$$，并且仅在$$VT_{34}，VT_{35}和VT_{36}$$记录metadata，所以就可以避免因real compaction而导致的compaction I/O消耗。在之后的real compaction中，将$$T_{42}，T_{43}$$与$$VT_{34}，VT_{35}和VT_{36}$$的parentSSTable即$$T_{22}，T_{32}和T_{33}$$合并，得到$$T_{44}，T_{45}，T_{46}，T_{47}和T_{48}$$。</p>
+<p>优点：</p>
+<p>（1）与传统的compaction 策略相比，<strong>$$T_{22}，T_{32}和T_{33}$$在dCompaction中只读写一次，因此可以减少重复的I/O开销，写放大也会被极大降低</strong>。</p>
+<p>（2）通过计算，当AF=10时，$$C_{2}-&gt;C_{4}$$这个过程省下的带宽为8.3%。</p>
+<p>缺点：</p>
+<p><strong>虽然virtual compaction对写性能有很大的提升，但在读性能方面的影响更大，下面将讨论virtual compaction对读性能的影响。</strong></p>
+<h2 id="读过程"><a href="#读过程" class="headerlink" title="读过程"></a>读过程</h2><h3 id="real-SSTable中的读操作"><a href="#real-SSTable中的读操作" class="headerlink" title="real SSTable中的读操作"></a>real SSTable中的读操作</h3><p><img src="/2019/07/21/dCompaction论文阅读/real_read.png" alt="real_read"></p>
+<h3 id="virtual-SSTable中的读操作"><a href="#virtual-SSTable中的读操作" class="headerlink" title="virtual SSTable中的读操作"></a>virtual SSTable中的读操作</h3><p><img src="/2019/07/21/dCompaction论文阅读/virtual_read.png" alt="virtual_read"></p>
+<p>与在real SSTable中的读操作相同，在Virtual SSTable中进行读操作：</p>
+<p>首先，同样需要判断要查找的kv对的key值是否在该SSTable的key值范围内（介于smallest key和largest key之间）。假设在这个virtual SSTable中，那么就进行下一步。</p>
+<p>然后就与real SSTable中操作不同了，读取parentSSTables，并<strong>依次</strong>在parentSSTables中搜索kv对（依次体现在图中）。</p>
+<h3 id="结论-1"><a href="#结论-1" class="headerlink" title="结论"></a>结论</h3><p>通过对virtual SSTable的读取过程的分析，我们可以观察到，在许多real SSTable中搜索目标KV对时，<strong>读取的路径长度变大了，因此virtual SSTable中涉及到的real SSTable的数量是非常重要的</strong>。 换句话说，<strong>更频繁的virtual compaction意味着更高的写入性能但更低的读取性能</strong>。 相反，<strong>更频繁的real compaction意味着更低的写入性能，但更高的读取性能</strong>。 总之，触发real compaction或virtual compaction的条件对于写入和读取性能至关重要。</p>
+<h2 id="VCT和VSMT"><a href="#VCT和VSMT" class="headerlink" title="VCT和VSMT"></a>VCT和VSMT</h2><p>VCT和VSMT对应了<strong>写和读</strong>过程中的两个阈值：</p>
+<h3 id="VCT-触发条件"><a href="#VCT-触发条件" class="headerlink" title="VCT 触发条件"></a>VCT 触发条件</h3><p>Virtual Compaction Threshold，在进行real compaction触发之前，能够进行virtual compaction的real SSTable的数量的阈值（大于这个值，触发real compaction否则进行virtual compaction）。当大于这个阈值时，就发生real compaction。首先，我们计算real SSTable的数量，然后将其与VCT进行比较，以确定virtual compaction或real compaction（比如VCT为5，如果real SSTables的数量为6，那么就进行real compaction）。</p>
+<h4 id="如何设置VCT的值"><a href="#如何设置VCT的值" class="headerlink" title="如何设置VCT的值"></a>如何设置VCT的值</h4><p>（1）如果VCT的值设置的比较大，将会延长随后的real compaction的时间（因为总量上涨了），这将会导致写入吞吐量激增。因此就需要考虑：compaction过程中的总数据量以及随后发生real compaction时需要消耗的时间。</p>
+<p>（2）如上文中所说的，如果增大VCT，那么就会导致virtual SSTables含有更多的real SSTables，增加了read latency。因此，从读取性能的角度来看，VCT应该限制在一定范围内。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>通过后面的实验，考虑write amplification，real compaction time和read performance在内的多种因素。认为VCT应设置在8-16之间。</p>
+<h3 id="VSMT的触发条件"><a href="#VSMT的触发条件" class="headerlink" title="VSMT的触发条件"></a>VSMT的触发条件</h3><p>Virtual SSTable Merge Threshold,表示虚拟SSTable派生的真实SSTable的数量。在读取过程中，如果读取操作读取的是virtual SSTable并且其real SSTable的数量大于VSMT，则我们触发虚拟SSTable merge（不是compaction，因为不是在lsm多层结构下的）。</p>
+<p><img src="/2019/07/21/dCompaction论文阅读/VSMT.png" alt="VSMT"></p>
+<p>以上图为例，表示了VSMT触发后，进行merge的过程：</p>
+<p>不仅仅是$$VT_{34}$$将被转化为real SSTable，与之相邻的virtual SSTable也将被转化。</p>
+<p>这是因为在进行merge的过程中，生成了$$T_{34},T_{35},T_{36}$$，所以与$$VT_{34}$$相邻的$$VT_{35},VT_{36}$$会被merge进入$$T_{35},T_{36}$$中（$$T_{32},T_{33}$$中有一部分在merge中进入了$$T_{35},T_{36}$$,而$$VT_{35},VT_{36}$$代表的也是$$T_{32},T_{33}$$，不需要重复两者，这样只会消耗更多的带宽，所以过程中相邻的Virtual SSTable也会被转化）。</p>
+<h4 id="影响"><a href="#影响" class="headerlink" title="影响"></a>影响</h4><p>VSMT过大：对read性能的改善不明显。</p>
+<p>VSMT过小：对经常性地进行merge，增加了消耗，降低了dCompaction本应该发挥的积极影响。</p>
+<p>后续实验测的，3-6是一个合适的范围。</p>
+<p><a href="http://39.105.50.126/dcompaction/" target="_blank" rel="noopener">^_^</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yumz-p.xyz/2019/07/06/数据库笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -891,7 +1184,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1.9k
+                  1.8k
                 </span>
               
 
@@ -917,15 +1210,185 @@
 
       
         
-          <h1 id="1-挂载相关的信息"><a href="#1-挂载相关的信息" class="headerlink" title="1.挂载相关的信息"></a>1.挂载相关的信息</h1><p><code>mount c /Users/panyumingzhi/masm</code></p>
+          
+            <h1 id="1-挂载相关的信息"><a href="#1-挂载相关的信息" class="headerlink" title="1.挂载相关的信息"></a>1.挂载相关的信息</h1><p><code>mount c /Users/panyumingzhi/masm</code></p>
 <p>（注意这里可以使用<code>alt</code>+<code>空格</code>+<code>enter</code>全屏）</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/03/25/汇编语言/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+<h1 id="2-转到c"><a href="#2-转到c" class="headerlink" title="2.转到c:"></a>2.转到c:</h1><p><code>c:</code></p>
+<h1 id="3-定义数据："><a href="#3-定义数据：" class="headerlink" title="3.定义数据："></a>3.定义数据：</h1><p><1>db 一个字节</1></p>
+<p><2>dw 一个字表示两个字节</2></p>
+<p><3>dd 两个字，表示4个字节</3></p>
+<p><4>dup 表示数据重复的指令<br>db N dup(xx)     ;      dup表示定义的数据，N表示重复的个数<br>dw N dup(xx)     ;     dup表示定义的数据，N表示重复的个数<br>dd N dup(xx)     ;     dup表示定义的数据，N表示重复的个数</4></p>
+<h1 id="4-Debug指令："><a href="#4-Debug指令：" class="headerlink" title="4.Debug指令："></a>4.Debug指令：</h1><p><code>a</code>:汇编</p>
+<p><code>u</code>:显示写的程序的内容，反汇编</p>
+<p><code>t</code>:单步执行</p>
+<p><code>g</code>:按地址执行</p>
+<p><code>q</code>:退出</p>
+<h2 id="R"><a href="#R" class="headerlink" title="R"></a>R</h2><p>显示或改变一个或多个 CPU 寄存器的内容。</p>
+<p>r [register-name]</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>register-name</td>
+<td>指定要显示其内容的寄存器名。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><p>只查看标志的状态，键入命令<code>rf</code>;</p>
+<p>要查看所有寄存器的内容、所有标记的状态和当前位置的指令解码表，键入<code>r</code>;</p>
+<h2 id="D"><a href="#D" class="headerlink" title="D"></a>D</h2><p> 显示一定范围内存地址的内容。<br> d [range]  </p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>range</td>
+<td>指定要显示其内容的内存区域的起始和结束地址，或起始地址和长度。有关有效的 range 值 的信息，请单击“相关主题”列表中的“Debug 说明”。如果不指定 range，Debug 程序将 从以前 d 命令中所指定的地址范围的末尾开始显示 128 个字节的内容。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="说明：-1"><a href="#说明：-1" class="headerlink" title="说明："></a>说明：</h3><p>当使用 d 命令时，Debug 以两个部分显示内存内容:十六进制部分(每个字节的值都用十六 进制格式表示)和 ASCII 码部分(每个字节的值都用 ASCII 码字符表示)。<strong>每个非打印字符在显示的 ASCII 部分由句号 (.) 表示。</strong> <strong><em>每个显示行显示 16 字节的内容</em></strong>，<strong>第 8 字节和第 9 字节之间有一个连字符</strong>。每个显示行从 16 字节的边界上开始。     </p>
+<h2 id="E"><a href="#E" class="headerlink" title="E:"></a>E:</h2><p>将数据输入到内存中指定的地址。<br>可以按十六进制或 ASCII 格式键入数据。以前存储在指定位置的任何数据全部丢失。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">e address [list]</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>list</td>
+<td>指定要输入到内存的连续字节中的数据。</td>
+</tr>
+<tr>
+<td>address</td>
+<td>指定输入数据的第一个内存位置。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="没有指定可选的-list-参数的值情况下指定-address-的值"><a href="#没有指定可选的-list-参数的值情况下指定-address-的值" class="headerlink" title="没有指定可选的 list 参数的值情况下指定 address 的值:"></a>没有指定可选的 list 参数的值情况下指定 address 的值:</h3><p>Debug 将显示地址和内容，在下一行重复地址，并等待您的输入。此时，可以执行:</p>
+<p>(1)替换字节值。为此，请在当前值后键入新值。如果键入的值不是有效的十六进制值，或该 值包含两个以上的数字，则 Debug 不会回显无效或额外的字符。 进入下一个字节。为此，请按 SPACEBAR(空格键)。要更改该字节中的值，请在当前值后键 入新值。如果按 SPACEBAR(空格键)时，移动超过了 8 位界限，Debug 程序将显示新的一 行并在行首显示新地址。<br> (2)返回到前一个字节。为此，请按 HYPHEN 键 (-)。可以反复按 HYPHEN 键 (-) 向后移动超过多个字节。在按 HYPHEN 时，Debug 开始新行并显示当前地址和字节值。<br> 停止执行 e 命令。为此，请按 ENTER 键。在任何字节位置都可以按 ENTER。</p>
+<h3 id="使用-list-参数"><a href="#使用-list-参数" class="headerlink" title="使用 list 参数:"></a>使用 list 参数:</h3><p>如果指定 list 参数的值，随后的 e 命令将使用列表中的值替换现有的字节值。如果发生错误，将不更改任何字节值。 </p>
+<p>List 值可以是十六进制字节或字符串。使用空格、逗号或制表符来分隔值。必须将字符串包 括在单或双引号中。 </p>
+<h2 id="F"><a href="#F" class="headerlink" title="F:"></a>F:</h2><p>使用指定的值填充指定内存区域中的地址。<br>可以指定十六进制或 ASCII 格式表示的数据。任何以前存储在指定位置的数据将会丢失。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f range list</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>range</td>
+<td>表示填充内存的的起始位置和终止位置，或起始地址和长度。</td>
+</tr>
+<tr>
+<td>list</td>
+<td>表示指定的要输入的数据，可由<strong>十六进制数</strong>或<strong>引号包围起来的字符串</strong>组成。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="说明：-2"><a href="#说明：-2" class="headerlink" title="说明："></a>说明：</h3><p>(1)如果 range 包含的字节数&gt; list 中的数值，Debug 将在 list 中反复指派值，直到 range 中的所有字节全部填充。 </p>
+<p>(2)如果在 range 中的任何内存损坏或不存在，Debug 将显示错误消息并停止 f 命令。<br>(3)如果 list 包含的数值多于 range 中的字节数，Debug 将忽略 list 中额外的值。 </p>
+<h1 id="5-汇编操作符"><a href="#5-汇编操作符" class="headerlink" title="5.汇编操作符"></a>5.汇编操作符</h1><h2 id="INC和DEC"><a href="#INC和DEC" class="headerlink" title="INC和DEC"></a>INC和DEC</h2><h3 id="INC：加1指令"><a href="#INC：加1指令" class="headerlink" title="INC：加1指令"></a>INC：加1指令</h3><p><code>inc a</code>相当于 <code>add a,1 ;i++</code><br>优点:速度比sub指令快，占用空间小<br>这条指令执行结果影响AF、OF、PF、SF、ZF标志位,但不影响CF进位标志位.</p>
+<h3 id="DEC：减1指令"><a href="#DEC：减1指令" class="headerlink" title="DEC：减1指令"></a>DEC：减1指令</h3><p><code>dec a</code> 相当于<code>sub a,1</code></p>
+<p>优点 速度比sub指令快，占用空间小<br>这条指令执行结果影响AF、OF、PF、SF、ZF标志位,但不影响CF进位标志位.</p>
+<h1 id="6-标志位"><a href="#6-标志位" class="headerlink" title="6.标志位"></a>6.标志位</h1><h2 id="条件码-状态-标志"><a href="#条件码-状态-标志" class="headerlink" title="条件码(状态)标志"></a>条件码(状态)标志</h2><p>用来记录程序中运行结果的状态信息。</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+<th>值为1</th>
+<th>值为0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OF(Overflow)</td>
+<td>溢出标志（指字节(字)运算结果超过了所能表数的范围）</td>
+<td>溢出（ov）</td>
+<td>未溢出（nv）</td>
+</tr>
+<tr>
+<td>SF(Sign)</td>
+<td>符号标志（与运算结果的最高位相同）</td>
+<td>结果为负(ng)</td>
+<td>结果为正(pl)</td>
+</tr>
+<tr>
+<td>ZF(Zero)</td>
+<td>零标志</td>
+<td>运算结果为零(zr)</td>
+<td>运算结果不为零(nz)</td>
+</tr>
+<tr>
+<td>CF(Carry)</td>
+<td>进位标志</td>
+<td>最高有效位产生进位或借位(cy)</td>
+<td>最高有效位未产生进位或借位(nc)</td>
+</tr>
+<tr>
+<td>AF(Auxiliary Carry)</td>
+<td>辅助进位标志（执行十进制运算指令时，记录运算结果中低半字节(最低4位)向高半字节(即D3向D4)的进位情况。 ）</td>
+<td>D3向D4有进位或借位(ac)</td>
+<td>D3向D4没有进位或借位(na)</td>
+</tr>
+<tr>
+<td>PF(Parity)</td>
+<td>奇偶标志（运算结果的低8位中，<strong>“</strong>1<strong>”</strong>的个数）</td>
+<td>偶数</td>
+<td>奇数</td>
+</tr>
+</tbody>
+</table>
+<h2 id="控制标志"><a href="#控制标志" class="headerlink" title="控制标志"></a>控制标志</h2><p>控制标志控制处理器的操作，要通过专门的指令才能使控制标志发生变化</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+<th>值为1</th>
+<th>值为0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DF(Direction)</td>
+<td>方向标志(用于控制串操作，指示串操作时操作数地址的增减方向)</td>
+<td>串操作后使变址寄存器SI、DI自动减量(dn)</td>
+<td>串操作后，使SI、DI自动增量(up)</td>
+</tr>
+<tr>
+<td>IF(Interrupt)</td>
+<td>中断标志（只对外部可屏蔽中断请求(INTR)起作用）</td>
+<td>允许CPU响应INTR（ei）</td>
+<td>禁止响应INTR(di)</td>
+</tr>
+<tr>
+<td>TF(Trap)</td>
+<td>陷阱标志（用于程序调试）</td>
+<td>CPU处于单步运行方式</td>
+<td>CPU处于正常工作方式</td>
+</tr>
+</tbody>
+</table>
+<h1 id="7-寄存器"><a href="#7-寄存器" class="headerlink" title="7.寄存器"></a>7.寄存器</h1><p>AX BX CX DX是CPU内部的通用寄存器中的数据寄存器,数据寄存器一般用于存放参与运算的数据或运算的结果,每一个数据寄存器都是16位的(即16个二进制位),但又<strong>可以将高,低8位分别作为两个独立的8位寄存器使用</strong>.<strong>它们的高8位记作AH,BH,CH,DH,低8位记作AL,BL,CL,DL.</strong>这种灵活的使用方法给编程带来极大的方便,既可以处理16位数据,也能处理8位数据.</p>
+
+          
         
       
     </div>
@@ -1163,7 +1626,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1264,7 +1727,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">4.1k</span>
+    <span title="Site words total count">6.9k</span>
   
 </div>
 
