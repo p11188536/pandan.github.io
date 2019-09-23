@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yumz-p.xyz/"/>
-  <updated>2019-09-23T10:18:12.476Z</updated>
+  <updated>2019-09-23T10:22:07.633Z</updated>
   <id>http://yumz-p.xyz/</id>
   
   <author>
@@ -21,17 +21,38 @@
     <link href="http://yumz-p.xyz/2019/09/23/wx/"/>
     <id>http://yumz-p.xyz/2019/09/23/wx/</id>
     <published>2019-09-23T10:15:55.000Z</published>
-    <updated>2019-09-23T10:18:12.476Z</updated>
+    <updated>2019-09-23T10:22:07.633Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          
-        
-      
+      &lt;h1 id=&quot;小程序&quot;&gt;&lt;a href=&quot;#小程序&quot; class=&quot;headerlink&quot; title=&quot;小程序&quot;&gt;&lt;/a&gt;小程序&lt;/h1&gt;&lt;h2 id=&quot;特点&quot;&gt;&lt;a href=&quot;#特点&quot; class=&quot;headerlink&quot; title=&quot;特点&quot;&gt;&lt;/a&gt;特点&lt;/h2&gt;&lt;p&gt;做简单的、用完即走的应用&lt;/p&gt;
+&lt;p&gt;适合低频的应用&lt;/p&gt;
+&lt;p&gt;适合性能要求不高的应用&lt;/p&gt;
+&lt;h2 id=&quot;学习&quot;&gt;&lt;a href=&quot;#学习&quot; class=&quot;headerlink&quot; title=&quot;学习&quot;&gt;&lt;/a&gt;学习&lt;/h2&gt;&lt;p&gt;JavaScript+CSS&lt;/p&gt;
+&lt;p&gt;ES6&lt;/p&gt;
+&lt;h2 id=&quot;一个界面的文件&quot;&gt;&lt;a href=&quot;#一个界面的文件&quot; class=&quot;headerlink&quot; title=&quot;一个界面的文件&quot;&gt;&lt;/a&gt;一个界面的文件&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;/2019/09/23/wx/image-20190919192921193.png&quot; alt=&quot;image-20190919192921193&quot;&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;.html/.htm&lt;/th&gt;
+&lt;th&gt;标记语言，页面骨架作用&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;.css&lt;/td&gt;
+&lt;td&gt;样式表，在html中使用class来包含某一个样式表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;.js&lt;/td&gt;
+&lt;td&gt;函数，逻辑操作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;.json&lt;/td&gt;
+&lt;td&gt;配置文件，配置页面（最外层的为全局配置文件）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
     
     </summary>
     
